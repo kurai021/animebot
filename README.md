@@ -1,3 +1,8 @@
+# Animebot
+The first (EXPERIMENTAL) bot for Amino!
+
+Animebot is a simple anime/manga related bot for Amino when you can find information about Anime and Manga in spanish (maybe in the future I want to support OVA, ONA, music original videos, movies, tv shorts, DVD/Bluray specials, one shots and novels).
+
 ## Install
 
 * Install dependencies:
@@ -19,5 +24,10 @@ Example: /getManga death note
 ```
 * /getAnime title: Get anime information (title native, romaji, image, start and end of publication, episodes, duration and description).
 ```
-Ejemplo: /getAnime evangelion
+Example: /getAnime evangelion
 ```
+
+## Acknowledgments
+
+* This software is unofficial! It's against the Terms of Service to use this Software to interact with Amino APIs. Me (the creator of Animebot) are not responsible for any kind of damage (ban / legal actions) done by Narvii, Inc. 
+* I am not responsible for any issue you have with this bot due to improper usage
