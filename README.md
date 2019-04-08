@@ -29,5 +29,6 @@ Example: /getAnime evangelion
 
 ## Acknowledgments
 
-* This software is unofficial! It's against the Terms of Service to use this Software to interact with Amino APIs. Me (the creator of Animebot) are not responsible for any kind of damage (ban / legal actions) done by Narvii, Inc. 
+* This software is unofficial! It's against the Terms of Service to use this Software to interact with Amino APIs. I (the creator of Animebot) am not responsible for any kind of damage (ban / legal actions) done by Narvii, Inc.
+* content +18 or NSFW is strictly prohibited in Amino, by default Animebot is configured not to show hentai content, yet the Anilist API does not ensure that the adult filter is 100% reliable. It should also be considered that ecchi does not strictly enter as +18, so Animebot could display this content.
 * I am not responsible for any issue you have with this bot due to improper usage

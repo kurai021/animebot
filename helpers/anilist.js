@@ -4,7 +4,7 @@ const endpoint = "https://graphql.anilist.co"
 async function getManga(data){
     const query = `{
         Page {
-            media(search: "${data}", type: MANGA, format: MANGA) {
+            media(search: "${data}", type: MANGA, format: MANGA, isAdult: false) {
                 title {
                     romaji
                     native
@@ -42,7 +42,7 @@ getManga().catch(error => {return error})
 async function getAnime(data){
     const query = `{
         Page {
-            media(search: "${data}", type: ANIME, format: TV) {
+            media(search: "${data}", type: ANIME, format: TV, isAdult: false) {
                 title {
                     romaji
                     native
