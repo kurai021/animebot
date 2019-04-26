@@ -4,7 +4,6 @@ const fs = require('fs');
 const LanguageTranslatorV3 = require(
     'watson-developer-cloud/language-translator/v3'
 );
-
 const auth = require("../helpers/auth");
 const Poller = require('../helpers/poller');
 const anilist = require("../helpers/anilist");
@@ -32,6 +31,7 @@ let poller = new Poller(5000);
             let message = lastMessage
                 .messages[0]
                 .msg
+            let characterMatch = message.match(/\/getCharacter (.*)/)
             let mangaMatch = message.match(/\/getManga (.*)/)
             let animeMatch = message.match(/\/getAnime (.*)/)
             let randomAnimeMatch = message.match(/\/getRandomAnime (.*)/)
@@ -61,7 +61,67 @@ Ejemplo: /getAnime evangelion
 /getRandomManga categoría: Obtiene información de un manga al azar
 
 Las categorías definidas en ambos casos son: Action, Adventure, Comedy, Drama, Ecchi, Fantasy, Horror, Mahou Shoujo, Mecha, Music, Mystery, Psychological, Romance, Sci-Fi, Slice of Life, Sports, Supernatural, Thriller
+
+/getCharacter personaje: Obtiene una biografía de un personaje
+
+Ejemplo: /getCharacter Conan Edogawa
                     `)
+            }
+
+            /* orden para obtener información de personajes */
+
+            if (characterMatch != null && lastMessage.messages[0].author.uid != myProfile.account.uid) {
+                console.log("buscando personaje...");
+                let res = await anilist.getCharacter(characterMatch[1])
+                let textFixed = res
+                    .description
+                    .replace(/<br>\\*/g, `
+                    `)
+                    .replace(/<br \/>\\*/g, `
+                    `)
+                    .replace(/__\\*/g,'')
+
+                const paramsTranslator = {
+                    text: textFixed,
+                    model_id: 'en-es'
+                };
+
+                fetch(res.image.large)
+                    .then(res => {
+                        const dest = fs.createWriteStream(`${timestamp}.jpg`);
+                        res.body.pipe(dest);
+                        dest.on("finish", async function(){
+                            await amino.sendImage(
+                                auth.amino.community,
+                                receiver,
+                                './' + timestamp + '.jpg'
+                            )
+                        })
+                    });
+                
+                /*el parser de texto del cliente de Amino es la cosa más extraña que he visto*/
+                await amino.sendChat(
+                    auth.amino.community,
+                    receiver,
+                    `
+                    Nombre: ${res.name.first} ${res.name.last}
+Romaji: ${res.name.native}
+                    `
+                )
+
+                await languageTranslator.translate(paramsTranslator, function (err, res) {
+                    const es_description = res
+                        .translations[0]
+                        .translation
+                    if (err) {
+                        console.log("error" + err)
+                    } else {
+                        (async function () {
+                            await amino.sendChat(auth.amino.community, receiver, es_description)
+                        })();
+                    }
+                });
+
             }
 
             /* orden random manga */

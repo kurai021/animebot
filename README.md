@@ -26,10 +26,15 @@ Example: /getManga death note
 ```
 Example: /getAnime evangelion
 ```
-* /getRandomAnime categoría: Obtiene información de un anime al azar
-* /getRandomManga categoría: Obtiene información de un manga al azar
-
+* /getRandomAnime categoría: Get anime suggestions randomly
+* /getRandomManga categoría: Get manga suggestions randomly
+```
 The categories in both cases are: Action, Adventure, Comedy, Drama, Ecchi, Fantasy, Horror, Mahou Shoujo, Mecha, Music, Mystery, Psychological, Romance, Sci-Fi, Slice of Life, Sports, Supernatural, Thriller
+```
+* /getCharacter character: Get character bio
+```
+Example: /getCharacter Conan Edogawa
+```
 
 ## Acknowledgments
 

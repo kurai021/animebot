@@ -1,6 +1,27 @@
 const { request } = require("graphql-request")
 const endpoint = "https://graphql.anilist.co"
 
+async function getCharacter(data){
+    const query = `{
+        Character(search: "${data}"){
+          id
+          name {
+            first
+            last
+            native
+          }
+          image {
+            large
+          }
+          description(asHtml: false)
+        }
+      }`
+
+      const res = await request(endpoint, query)
+      return res.Character
+}
+getCharacter().catch(error => {return error})
+
 async function getRandomManga(data){
     const query = `{
         Page {
@@ -112,7 +133,6 @@ async function getManga(data){
     }`
 
     const res = await request(endpoint, query)
-
     return res.Page.media[0]
 }
 getManga().catch(error => {return error})
@@ -150,7 +170,6 @@ async function getAnime(data){
     }`
 
     const res = await request(endpoint, query)
-
     return res.Page.media[0]
 }
 getAnime().catch(error => {return error})
@@ -159,5 +178,6 @@ module.exports = {
     getManga: getManga,
     getAnime: getAnime,
     getRandomAnime: getRandomAnime,
-    getRandomManga: getRandomManga
+    getRandomManga: getRandomManga,
+    getCharacter: getCharacter
 }
