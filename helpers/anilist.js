@@ -13,7 +13,7 @@ async function getCharacter(data){
           image {
             large
           }
-          description(asHtml: false)
+          description(asHtml: true)
         }
       }`
 

@@ -1,16 +1,10 @@
 const amino = require("amino.js");
 const fetch = require("node-fetch")
 const fs = require('fs');
-const LanguageTranslatorV3 = require(
-    'watson-developer-cloud/language-translator/v3'
-);
+const translate = require('node-google-translate-skidz');
 const auth = require("../helpers/auth");
 const Poller = require('../helpers/poller');
 const anilist = require("../helpers/anilist");
-
-const languageTranslator = new LanguageTranslatorV3(
-    {iam_apikey: auth.translator.iam_apikey, url: auth.translator.url, version: auth.translator.version}
-);
 
 let poller = new Poller(5000);
 
@@ -79,13 +73,11 @@ Ejemplo: /getCharacter Conan Edogawa
                     `)
                     .replace(/<br \/>\\*/g, `
                     `)
-                    .replace(/__\\*/g,'')
-
-                const paramsTranslator = {
-                    text: textFixed,
-                    model_id: 'en-es'
-                };
-
+                    .replace(/<p>\\*/g, '')
+                    .replace(/<\/p>\\*/g, '')
+                    .replace(/<strong>\\*/g, '『 ')
+                    .replace(/<\/strong>\\*/g, ' 』')
+                    
                 fetch(res.image.large)
                     .then(res => {
                         const dest = fs.createWriteStream(`${timestamp}.jpg`);
@@ -109,18 +101,13 @@ Romaji: ${res.name.native}
                     `
                 )
 
-                await languageTranslator.translate(paramsTranslator, function (err, res) {
-                    const es_description = res
-                        .translations[0]
-                        .translation
-                    if (err) {
-                        console.log("error" + err)
-                    } else {
-                        (async function () {
-                            await amino.sendChat(auth.amino.community, receiver, es_description)
-                        })();
-                    }
-                });
+                await translate({
+                    text: textFixed,
+                    source: 'en',
+                    target: 'es'
+                  }, async function(result) {
+                      await amino.sendChat(auth.amino.community, receiver, result.translation)
+                  });
 
             }
 
@@ -133,11 +120,6 @@ Romaji: ${res.name.native}
                     .description
                     .replace(/<br>\\*/g, `
                     `)
-
-                const paramsTranslator = {
-                    text: textFixed,
-                    model_id: 'en-es'
-                };
 
                 fetch(res.coverImage.large)
                     .then(res => {
@@ -168,18 +150,13 @@ Volumenes: ${res.volumes}
                     `
                 )
 
-                await languageTranslator.translate(paramsTranslator, function (err, res) {
-                    const es_description = res
-                        .translations[0]
-                        .translation
-                    if (err) {
-                        console.log("error" + err)
-                    } else {
-                        (async function () {
-                            await amino.sendChat(auth.amino.community, receiver, es_description)
-                        })();
-                    }
-                });
+                await translate({
+                    text: textFixed,
+                    source: 'en',
+                    target: 'es'
+                  }, async function(result) {
+                      await amino.sendChat(auth.amino.community, receiver, result.translation)
+                  });
 
             }
 
@@ -192,11 +169,6 @@ Volumenes: ${res.volumes}
                     .description
                     .replace(/<br>\\*/g, `
                     `)
-
-                const paramsTranslator = {
-                    text: textFixed,
-                    model_id: 'en-es'
-                };
 
                 fetch(res.coverImage.large)
                     .then(res => {
@@ -227,18 +199,13 @@ Duración: ${res.duration} minutos
                         `
                     )
 
-                    await languageTranslator.translate(paramsTranslator, function (err, res) {
-                        const es_description = res
-                            .translations[0]
-                            .translation
-                        if (err) {
-                            console.log("error" + err)
-                        } else {
-                            (async function () {
-                                await amino.sendChat(auth.amino.community, receiver, es_description)
-                            })();
-                        }
-                    });
+                    await translate({
+                        text: textFixed,
+                        source: 'en',
+                        target: 'es'
+                      }, async function(result) {
+                          await amino.sendChat(auth.amino.community, receiver, result.translation)
+                      });
             }
 
             /* orden para buscar manga */
@@ -250,11 +217,6 @@ Duración: ${res.duration} minutos
                     .description
                     .replace(/<br>\\*/g, `
                     `)
-
-                const paramsTranslator = {
-                    text: textFixed,
-                    model_id: 'en-es'
-                };
 
                 fetch(res.coverImage.large)
                     .then(res => {
@@ -285,18 +247,13 @@ Volumenes: ${res.volumes}
                     `
                 )
 
-                await languageTranslator.translate(paramsTranslator, function (err, res) {
-                    const es_description = res
-                        .translations[0]
-                        .translation
-                    if (err) {
-                        console.log("error" + err)
-                    } else {
-                        (async function () {
-                            await amino.sendChat(auth.amino.community, receiver, es_description)
-                        })();
-                    }
-                });
+                await translate({
+                    text: textFixed,
+                    source: 'en',
+                    target: 'es'
+                  }, async function(result) {
+                      await amino.sendChat(auth.amino.community, receiver, result.translation)
+                  });
 
             }
 
@@ -309,11 +266,6 @@ Volumenes: ${res.volumes}
                     .description
                     .replace(/<br>\\*/g, `
                     `)
-
-                const paramsTranslator = {
-                    text: textFixed,
-                    model_id: 'en-es'
-                };
 
                 fetch(res.coverImage.large)
                     .then(res => {
@@ -344,18 +296,13 @@ Duración: ${res.duration} minutos
                         `
                     )
 
-                    await languageTranslator.translate(paramsTranslator, function (err, res) {
-                        const es_description = res
-                            .translations[0]
-                            .translation
-                        if (err) {
-                            console.log("error" + err)
-                        } else {
-                            (async function () {
-                                await amino.sendChat(auth.amino.community, receiver, es_description)
-                            })();
-                        }
-                    });
+                    await translate({
+                        text: textFixed,
+                        source: 'en',
+                        target: 'es'
+                      }, async function(result) {
+                          await amino.sendChat(auth.amino.community, receiver, result.translation)
+                      });
             }
             
         })();
