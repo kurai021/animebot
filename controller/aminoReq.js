@@ -21,7 +21,7 @@ let poller = new Poller(5000);
             let firstChatRoom = chatRooms.threads[0];
             let receiver = firstChatRoom.threadId;
             let lastMessage = await amino.getChat(auth.amino.community, receiver);
-
+            let members = firstChatRoom.memberCount;
             let message = lastMessage
                 .messages[0]
                 .msg
@@ -34,7 +34,7 @@ let poller = new Poller(5000);
 
             /* no encontrado */
 
-            if(helpMatch == null && characterMatch == null && animeMatch == null && mangaMatch == null && randomAnimeMatch == null && randomMangaMatch == null && lastMessage.messages[0].author.uid != myProfile.account.uid){
+            if(helpMatch == null && characterMatch == null && animeMatch == null && mangaMatch == null && randomAnimeMatch == null && randomMangaMatch == null && lastMessage.messages[0].author.uid != myProfile.account.uid && members == 1){
 
                 await amino.sendChat(
                     auth.amino.community,
