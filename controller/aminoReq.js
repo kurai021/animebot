@@ -32,6 +32,19 @@ let poller = new Poller(5000);
             let randomMangaMatch = message.match(/\/getRandomManga (.*)/)
             let helpMatch = message.match(/\/help/)
 
+            /* no encontrado */
+
+            if(helpMatch == null && characterMatch == null && animeMatch == null && mangaMatch == null && randomAnimeMatch == null && randomMangaMatch == null && lastMessage.messages[0].author.uid != myProfile.account.uid){
+
+                await amino.sendChat(
+                    auth.amino.community,
+                    receiver,
+                    `
+                    Comando incorrecto, puede conocer los comandos disponibles con /help
+                    `
+                )
+            }
+
             /* orden help */
 
             if (helpMatch != null && lastMessage.messages[0].author.uid != myProfile.account.uid) {
