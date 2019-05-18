@@ -105,14 +105,44 @@ Ejemplo: /getCharacter Conan Edogawa
                     });
                 
                 /*el parser de texto del cliente de Amino es la cosa más extraña que he visto*/
-                await amino.sendChat(
-                    auth.amino.community,
-                    receiver,
-                    `
-                    Nombre: ${res.name.first} ${res.name.last}
+
+                if(res.name.last == null && res.name.native != null) {
+
+                    await amino.sendChat(
+                        auth.amino.community,
+                        receiver,
+                        `
+                        Nombre: ${res.name.first}
 Romaji: ${res.name.native}
-                    `
-                )
+                        `
+                    )
+
+                }
+
+                else if(res.name.last == null && res.name.native == null){
+
+                    await amino.sendChat(
+                        auth.amino.community,
+                        receiver,
+                        `
+                        Nombre: ${res.name.first}
+                        `
+                    )
+
+                }
+
+                else {
+
+                    await amino.sendChat(
+                        auth.amino.community,
+                        receiver,
+                        `
+                        Nombre: ${res.name.first} ${res.name.last}
+Romaji: ${res.name.native}
+                        `
+                    )
+                    
+                }
 
                 await translate({
                     text: textFixed,
