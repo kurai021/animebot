@@ -12,28 +12,25 @@ let poller = new Poller(3000);
     await amino.login(auth.amino.email, auth.amino.password)
     const myProfile = await amino.getMyProfile()
 
-    const chatRooms = await amino.getJoinedChats(auth.amino.community);
-
     poller.onPoll(() => {
 
         (async function () {
-            //let firstChatRoom = chatRooms.threads[0];
+            let timestamp = Math.floor(Date.now() / 1000)
 
-            for(let firstChatRoom of chatRooms.threads){
-                let timestamp = Math.floor(Date.now() / 1000);
-
-                let receiver = firstChatRoom.threadId;
-                let lastMessage = await amino.getChat(auth.amino.community, receiver);
-
-                let members = firstChatRoom.memberCount;
-                let message = lastMessage.messages[0].msg
-
-                let characterMatch = message.match(/\/getCharacter (.*)/)
-                let mangaMatch = message.match(/\/getManga (.*)/)
-                let animeMatch = message.match(/\/getAnime (.*)/)
-                let randomAnimeMatch = message.match(/\/getRandomAnime (.*)/)
-                let randomMangaMatch = message.match(/\/getRandomManga (.*)/)
-                let helpMatch = message.match(/\/help/)
+            const chatRooms = await amino.getJoinedChats(auth.amino.community);
+            let firstChatRoom = chatRooms.threads[0];
+            let receiver = firstChatRoom.threadId;
+            let lastMessage = await amino.getChat(auth.amino.community, receiver);
+            let members = firstChatRoom.memberCount;
+            let message = lastMessage
+                .messages[0]
+                .msg
+            let characterMatch = message.match(/\/getCharacter (.*)/)
+            let mangaMatch = message.match(/\/getManga (.*)/)
+            let animeMatch = message.match(/\/getAnime (.*)/)
+            let randomAnimeMatch = message.match(/\/getRandomAnime (.*)/)
+            let randomMangaMatch = message.match(/\/getRandomManga (.*)/)
+            let helpMatch = message.match(/\/help/)
 
             /* no encontrado */
 
@@ -59,11 +56,9 @@ let poller = new Poller(3000);
                     /help: Obtiene estas instrucciones
                     
 /getManga título: Obtiene información de un manga específico (título nativo, romaji, imagen, inicio y fin de publicación, capítulos, volumenes y descripción).
-
 Ejemplo: /getManga death note
 
 /getAnime título: Obtiene información de un anime específico (título nativo, romaji, imagen, inicio y fin de publicación, episodios, duración aproximada y descripción).
-
 Ejemplo: /getAnime evangelion
 
 /getRandomAnime categoría: Obtiene información de un anime al azar
@@ -73,7 +68,6 @@ Ejemplo: /getAnime evangelion
 Las categorías definidas en ambos casos son: Action, Adventure, Comedy, Drama, Ecchi, Fantasy, Horror, Mahou Shoujo, Mecha, Music, Mystery, Psychological, Romance, Sci-Fi, Slice of Life, Sports, Supernatural, Thriller
 
 /getCharacter personaje: Obtiene una biografía de un personaje
-
 Ejemplo: /getCharacter Conan Edogawa
                     `)
             }
@@ -187,10 +181,8 @@ Romaji: ${res.name.native}
                     `
                     Nombre: ${res.title.native}
 Romaji: ${res.title.romaji}
-
 Inicio: ${res.startDate.day}-${res.startDate.month}-${res.startDate.year}
 Final: ${res.endDate.day}-${res.endDate.month}-${res.endDate.year}
-
 Capítulos: ${res.chapters}
 Volumenes: ${res.volumes}
                     `
@@ -236,10 +228,8 @@ Volumenes: ${res.volumes}
                         `
                         Nombre: ${res.title.native}
 Romaji: ${res.title.romaji}
-
 Inicio: ${res.startDate.day}-${res.startDate.month}-${res.startDate.year}
 Final: ${res.endDate.day}-${res.endDate.month}-${res.endDate.year}
-
 Episodios: ${res.episodes}
 Duración: ${res.duration} minutos
                         `
@@ -284,10 +274,8 @@ Duración: ${res.duration} minutos
                     `
                     Nombre: ${res.title.native}
 Romaji: ${res.title.romaji}
-
 Inicio: ${res.startDate.day}-${res.startDate.month}-${res.startDate.year}
 Final: ${res.endDate.day}-${res.endDate.month}-${res.endDate.year}
-
 Capítulos: ${res.chapters}
 Volumenes: ${res.volumes}
                     `
@@ -333,10 +321,8 @@ Volumenes: ${res.volumes}
                         `
                         Nombre: ${res.title.native}
 Romaji: ${res.title.romaji}
-
 Inicio: ${res.startDate.day}-${res.startDate.month}-${res.startDate.year}
 Final: ${res.endDate.day}-${res.endDate.month}-${res.endDate.year}
-
 Episodios: ${res.episodes}
 Duración: ${res.duration} minutos
                         `
@@ -349,7 +335,6 @@ Duración: ${res.duration} minutos
                       }, async function(result) {
                           await amino.sendChat(auth.amino.community, receiver, result.translation)
                       });
-            }
             }
             
         })();
