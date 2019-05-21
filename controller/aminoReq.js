@@ -12,25 +12,28 @@ let poller = new Poller(5000);
     await amino.login(auth.amino.email, auth.amino.password)
     const myProfile = await amino.getMyProfile()
 
+    const chatRooms = await amino.getJoinedChats(auth.amino.community);
+
     poller.onPoll(() => {
 
         (async function () {
-            let timestamp = Math.floor(Date.now() / 1000)
+            //let firstChatRoom = chatRooms.threads[0];
 
-            const chatRooms = await amino.getJoinedChats(auth.amino.community);
-            let firstChatRoom = chatRooms.threads[0];
-            let receiver = firstChatRoom.threadId;
-            let lastMessage = await amino.getChat(auth.amino.community, receiver);
-            let members = firstChatRoom.memberCount;
-            let message = lastMessage
-                .messages[0]
-                .msg
-            let characterMatch = message.match(/\/getCharacter (.*)/)
-            let mangaMatch = message.match(/\/getManga (.*)/)
-            let animeMatch = message.match(/\/getAnime (.*)/)
-            let randomAnimeMatch = message.match(/\/getRandomAnime (.*)/)
-            let randomMangaMatch = message.match(/\/getRandomManga (.*)/)
-            let helpMatch = message.match(/\/help/)
+            for(let firstChatRoom of chatRooms.threads){
+                let timestamp = Math.floor(Date.now() / 1000);
+
+                let receiver = firstChatRoom.threadId;
+                let lastMessage = await amino.getChat(auth.amino.community, receiver);
+
+                let members = firstChatRoom.memberCount;
+                let message = lastMessage.messages[0].msg
+
+                let characterMatch = message.match(/\/getCharacter (.*)/)
+                let mangaMatch = message.match(/\/getManga (.*)/)
+                let animeMatch = message.match(/\/getAnime (.*)/)
+                let randomAnimeMatch = message.match(/\/getRandomAnime (.*)/)
+                let randomMangaMatch = message.match(/\/getRandomManga (.*)/)
+                let helpMatch = message.match(/\/help/)
 
             /* no encontrado */
 
@@ -346,6 +349,7 @@ Duración: ${res.duration} minutos
                       }, async function(result) {
                           await amino.sendChat(auth.amino.community, receiver, result.translation)
                       });
+            }
             }
             
         })();
