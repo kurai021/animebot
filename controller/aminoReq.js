@@ -6,7 +6,7 @@ const auth = require("../helpers/auth");
 const Poller = require('../helpers/poller');
 const anilist = require("../helpers/anilist");
 
-let poller = new Poller(5000);
+let poller = new Poller(3000);
 
 (async function () {
     await amino.login(auth.amino.email, auth.amino.password)
@@ -32,12 +32,12 @@ let poller = new Poller(5000);
                 let mangaMatch = message.match(/\/getManga (.*)/)
                 let animeMatch = message.match(/\/getAnime (.*)/)
                 let randomAnimeMatch = message.match(/\/getRandomAnime (.*)/)
-                let randomMangaMatch = message.match(/\/getRandomManga (.*)/)
+                let randomMangaMatch = message.match(/\/getRandomManga null/)
                 let helpMatch = message.match(/\/help/)
 
             /* no encontrado */
 
-            if(helpMatch == null && characterMatch == null && animeMatch == null && mangaMatch == null && randomAnimeMatch == null && randomMangaMatch == null && lastMessage.messages[0].author.uid != myProfile.account.uid && members == 1){
+            if(characterMatch == null && animeMatch == null && mangaMatch == null && randomAnimeMatch == null && randomMangaMatch == null && lastMessage.messages[0].author.uid != myProfile.account.uid && members == 1){
 
                 await amino.sendChat(
                     auth.amino.community,
