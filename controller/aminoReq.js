@@ -32,7 +32,7 @@ let poller = new Poller(3000);
                 let mangaMatch = message.match(/\/getManga (.*)/)
                 let animeMatch = message.match(/\/getAnime (.*)/)
                 let randomAnimeMatch = message.match(/\/getRandomAnime (.*)/)
-                let randomMangaMatch = message.match(/\/getRandomManga null/)
+                let randomMangaMatch = message.match(/\/getRandomManga (.*)/)
                 let helpMatch = message.match(/\/help/)
 
             /* no encontrado */
