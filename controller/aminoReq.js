@@ -37,7 +37,7 @@ let poller = new Poller(3000);
 
             /* no encontrado */
 
-            if(characterMatch == null && animeMatch == null && mangaMatch == null && randomAnimeMatch == null && randomMangaMatch == null && lastMessage.messages[0].author.uid != myProfile.account.uid && members == 1){
+            if(helpMatch == null && characterMatch == null && animeMatch == null && mangaMatch == null && randomAnimeMatch == null && randomMangaMatch == null && lastMessage.messages[0].author.uid != myProfile.account.uid && members == 1){
 
                 await amino.sendChat(
                     auth.amino.community,
