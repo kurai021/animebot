@@ -22,20 +22,45 @@ let poller = new Poller(3000);
             let receiver = firstChatRoom.threadId;
             let lastMessage = await amino.getChat(auth.amino.community, receiver);
             let members = firstChatRoom.memberCount;
-            let message = lastMessage
-                .messages[0]
-                .msg
-            let characterMatch = message.match(/\/getCharacter (.*)/)
-            let mangaMatch = message.match(/\/getManga (.*)/)
-            let animeMatch = message.match(/\/getAnime (.*)/)
-            let randomAnimeMatch = message.match(/\/getRandomAnime (.*)/)
-            let randomMangaMatch = message.match(/\/getRandomManga (.*)/)
-            let helpMatch = message.match(/\/help/)
+            let message = lastMessage.messages[0].msg;
 
-            /* no encontrado */
+            test(message);
 
-            if(helpMatch == null && characterMatch == null && animeMatch == null && mangaMatch == null && randomAnimeMatch == null && randomMangaMatch == null && lastMessage.messages[0].author.uid != myProfile.account.uid && members == 1){
+            function test(message){
+                if(lastMessage.messages[0].author.uid != myProfile.account.uid){
+                    switch(true){
+                        case /\/getCharacter (.*)/.test(message):
+                            reqCharacter(message);
+                            break;
+                        case /\/getManga (.*)/.test(message):
+                            reqManga(message);
+                            break;
+                        case /\/getAnime (.*)/.test(message):
+                            reqAnime(message);
+                            break;
+                        case /\/getRandomAnime (.*)/.test(message):
+                            reqRandomAnime(message);
+                            break;
+                        case /\/getRandomManga (.*)/.test(message):
+                            reqRandomManga(message);
+                            break;
+                        case /\/help/.test(message):
+                            reqHelp();
+                            break;
+                        default:
+                            if(members == 1){
+                                unknownText();
+                            }
+                            break;
+                    }
+                }
 
+                else {
+                    console.log("no hacer nada...");
+                }
+            }
+
+            async function unknownText(){
                 await amino.sendChat(
                     auth.amino.community,
                     receiver,
@@ -45,10 +70,7 @@ let poller = new Poller(3000);
                 )
             }
 
-            /* orden help */
-
-            if (helpMatch != null && lastMessage.messages[0].author.uid != myProfile.account.uid) {
-
+            async function reqHelp(){
                 await amino.sendChat(
                     auth.amino.community,
                     receiver,
@@ -72,10 +94,10 @@ Ejemplo: /getCharacter Conan Edogawa
                     `)
             }
 
-            /* orden para obtener información de personajes */
 
-            if (characterMatch != null && lastMessage.messages[0].author.uid != myProfile.account.uid) {
+            async function reqCharacter(req){
                 console.log("buscando personaje...");
+                let characterMatch = req.match(/\/getCharacter (.*)/)
                 let res = await anilist.getCharacter(characterMatch[1])
                 let textFixed = res
                     .description
@@ -141,22 +163,27 @@ Romaji: ${res.name.native}
                     
                 }
 
-                await translate({
+                translate({
                     text: textFixed,
                     source: 'en',
                     target: 'es'
                   }, async function(result) {
                       await amino.sendChat(auth.amino.community, receiver, result.translation)
                   });
-
             }
 
-            /* orden random manga */
 
-            if (randomMangaMatch != null && lastMessage.messages[0].author.uid != myProfile.account.uid) {
+            async function reqRandomManga(req){
                 console.log("buscando una sugerencia de manga...");
-                let res = await anilist.getRandomManga(randomMangaMatch[1])
-                let textFixed = res
+                const categories = ["Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Horror", "Mahou Shoujo", "Mecha", "Music", 
+                "Mystery", "Psychological", "Romance", "Sci-Fi", "Slice of Life", "Sports", "Supernatural", "Thriller","action", "adventure", "comedy", "drama", "ecchi", "fantasy", "horror", "mahou shoujo", "mecha", "music", 
+                "mystery", "psychological", "romance", "sci-fi", "slice of life", "sports", "supernatural", "thriller"]
+                let randomMangaMatch = req.match(/\/getRandomManga (.*)/)
+
+                if(categories.includes(randomMangaMatch[1])){
+
+                    let res = await anilist.getRandomManga(randomMangaMatch[1])
+                    let textFixed = res
                     .description
                     .replace(/<br>\\*/g, `
                     `)
@@ -174,7 +201,6 @@ Romaji: ${res.name.native}
                         })
                     });
                 
-                /*el parser de texto del cliente de Amino es la cosa más extraña que he visto*/
                 await amino.sendChat(
                     auth.amino.community,
                     receiver,
@@ -188,25 +214,38 @@ Volumenes: ${res.volumes}
                     `
                 )
 
-                await translate({
+                translate({
                     text: textFixed,
                     source: 'en',
                     target: 'es'
                   }, async function(result) {
                       await amino.sendChat(auth.amino.community, receiver, result.translation)
                   });
+                }
+
+                else {
+                    await amino.sendChat(
+                        auth.amino.community,
+                        receiver,
+                        'categoría no encontrada, las categorías son: Action, Adventure, Comedy, Drama, Ecchi, Fantasy, Horror, Mahou Shoujo, Mecha, Music, Mystery, Psychological, Romance, Sci-Fi, Slice of Life, Sports, Supernatural, Thriller'
+                    )
+                }
 
             }
 
-            /* orden random anime */
-
-            if (randomAnimeMatch != null && lastMessage.messages[0].author.uid != myProfile.account.uid) {
+            async function reqRandomAnime(req){
                 console.log("buscando una sugerencia de anime...");
-                let res = await anilist.getRandomAnime(randomAnimeMatch[1])
-                let textFixed = res
-                    .description
-                    .replace(/<br>\\*/g, `
-                    `)
+                const categories = ["Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Horror", "Mahou Shoujo", "Mecha", "Music", 
+                "Mystery", "Psychological", "Romance", "Sci-Fi", "Slice of Life", "Sports", "Supernatural", "Thriller","action", "adventure", "comedy", "drama", "ecchi", "fantasy", "horror", "mahou shoujo", "mecha", "music", 
+                "mystery", "psychological", "romance", "sci-fi", "slice of life", "sports", "supernatural", "thriller"]
+                let randomAnimeMatch = req.match(/\/getRandomAnime (.*)/)
+
+                if(categories.includes(randomAnimeMatch[1])){
+                    let res = await anilist.getRandomAnime(randomAnimeMatch[1])
+                    let textFixed = res
+                        .description
+                        .replace(/<br>\\*/g, `
+                        `)
 
                 fetch(res.coverImage.large)
                     .then(res => {
@@ -235,19 +274,27 @@ Duración: ${res.duration} minutos
                         `
                     )
 
-                    await translate({
+                    translate({
                         text: textFixed,
                         source: 'en',
                         target: 'es'
                       }, async function(result) {
                           await amino.sendChat(auth.amino.community, receiver, result.translation)
                       });
+                }
+
+                else {
+                    await amino.sendChat(
+                        auth.amino.community,
+                        receiver,
+                        'categoría no encontrada, las categorías son: Action, Adventure, Comedy, Drama, Ecchi, Fantasy, Horror, Mahou Shoujo, Mecha, Music, Mystery, Psychological, Romance, Sci-Fi, Slice of Life, Sports, Supernatural, Thriller'
+                    )
+                }
             }
 
-            /* orden para buscar manga */
-
-            if (mangaMatch != null && lastMessage.messages[0].author.uid != myProfile.account.uid) {
+            async function reqManga(req){
                 console.log("buscando manga...");
+                let mangaMatch = req.match(/\/getManga (.*)/)
                 let res = await anilist.getManga(mangaMatch[1])
                 let textFixed = res
                     .description
@@ -267,7 +314,6 @@ Duración: ${res.duration} minutos
                         })
                     });
                 
-                /*linea 89*/
                 await amino.sendChat(
                     auth.amino.community,
                     receiver,
@@ -281,20 +327,20 @@ Volumenes: ${res.volumes}
                     `
                 )
 
-                await translate({
+                translate({
                     text: textFixed,
                     source: 'en',
                     target: 'es'
                   }, async function(result) {
                       await amino.sendChat(auth.amino.community, receiver, result.translation)
                   });
-
             }
 
             /* orden para buscar anime */
 
-            if (animeMatch != null && lastMessage.messages[0].author.uid != myProfile.account.uid) {
+            async function reqAnime(req){
                 console.log("buscando anime...");
+                let animeMatch = req.match(/\/getAnime (.*)/)
                 let res = await anilist.getAnime(animeMatch[1])
                 let textFixed = res
                     .description
@@ -328,7 +374,7 @@ Duración: ${res.duration} minutos
                         `
                     )
 
-                    await translate({
+                    translate({
                         text: textFixed,
                         source: 'en',
                         target: 'es'
