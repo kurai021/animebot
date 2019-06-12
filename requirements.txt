@@ -19,7 +19,7 @@ jsonschema==2.6.0
 keyring==10.6.0
 keyrings.alt==3.0
 numpy==1.16.3
-opencv-contrib-python==4.1.0.25
+opencv-python-headless==4.1.0.25
 paramiko==2.4.2
 Pillow==6.0.0
 pyasn1==0.4.5
