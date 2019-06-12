@@ -17,6 +17,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 
 require("./controller/aminoReq")
-//require("./controller/aminoWebworker")
 
 module.exports = app;

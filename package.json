@@ -6,16 +6,20 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "amino.js": "git://github.com/AminoJS/Amino.JS.git#3.0.0-nightly",
+    "amino.js": "git://github.com/kurai021/Amino.JS.git#3.0.0-nightly",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^7.0.0",
     "events": "^3.0.0",
     "express": "~4.16.0",
     "graphql-request": "^1.8.2",
+    "mime": "^2.4.3",
     "morgan": "~1.9.0",
     "node-fetch": "^2.3.0",
     "node-google-translate-skidz": "^1.1.2",
-    "webworker-threads": "^0.7.17"
+    "pokedex-promise-v2": "^3.1.1",
+    "python-shell": "^1.0.7",
+    "webworker-threads": "^0.7.17",
+    "wikijs": "^5.2.1"
   }
 }

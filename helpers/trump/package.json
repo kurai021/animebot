@@ -1,0 +1,57 @@
+{
+  "_from": "illegalize",
+  "_id": "illegalize@1.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-ZoG+nbe9jpZaW7IYwygJN9u0tX+7lQTaY7m+e84hKlO1zcsCAxBpXGcSUouzGILTvinvShAisRyB6DfMHHomaw==",
+  "_location": "/illegalize",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "illegalize",
+    "name": "illegalize",
+    "escapedName": "illegalize",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/illegalize/-/illegalize-1.0.1.tgz",
+  "_shasum": "5ab779fa39dede29619055b055433bfa777ea719",
+  "_spec": "illegalize",
+  "_where": "/e/home_ubuntu/projects/animebot",
+  "author": {
+    "name": "josephmasresha",
+    "email": "jmasresha@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/josephmasresha/illegalize/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "mocha": "^5.2.0",
+    "python-shell": "^1.0.7"
+  },
+  "deprecated": false,
+  "description": "A node.js library of http://isnowillegal.com.",
+  "homepage": "https://github.com/josephmasresha/illegalize#readme",
+  "keywords": [
+    "trump",
+    "is-now-illegal",
+    "ban"
+  ],
+  "license": "MIT",
+  "main": "main.js",
+  "name": "illegalize",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephmasresha/illegalize.git"
+  },
+  "scripts": {
+    "test": "mocha ./test/test.js"
+  },
+  "version": "1.0.1"
+}

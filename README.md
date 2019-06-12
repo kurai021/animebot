@@ -17,7 +17,12 @@ npm install
 
 ## Use
 
+### Informative commands
+
 * /help: command to get the instructions
+
+### Commands related to anime and manga
+
 * /getManga title: Get manga information (title native, romaji, image, start and end of publication, chapters, volumes and description).
 ```
 Example: /getManga death note
@@ -34,6 +39,47 @@ The categories in both cases are: Action, Adventure, Comedy, Drama, Ecchi, Fanta
 * /getCharacter character: Get character bio
 ```
 Example: /getCharacter Conan Edogawa
+```
+
+### Funny commands and games
+
+* /8ball pregunta: Has una pregunta a la bola 8 mágica.
+```
+Ejemplo: /8ball Él no me vió?
+```
+
+* /flipCoin: Lanza una moneda para sacar cara o cruz.
+
+* /rsp: Juega piedra, papel o tijeras con Animebot.
+```
+Ejemplo: /rsp tijera
+```
+
+* /trump: Has que Donald Trump publique una nueva orden ejecutiva
+```
+Ejemplo: /trump tu madre es hombre
+```
+
+### Search commands
+
+* /getHoroscope: Obtiene tu horoscopo y número de la suerte diario.
+```
+Ejemplo: /getHoroscope aries
+```
+
+* /pokedex: Obtiene información de un Pokémon
+```
+Ejemplo: /pokedex pikachu
+```
+
+* /wikipedia: Obtiene información de Wikipedia en español
+```
+Ejemplo: /wikipedia anime
+```
+
+* /edamam: Obtiene información desde la base de datos de Edamam en español sobre alguna receta de cocina al azar basado en un término de busqueda
+```
+Ejemplo: /edamam chocolate
 ```
 
 ## Acknowledgments
