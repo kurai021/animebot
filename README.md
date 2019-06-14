@@ -1,7 +1,7 @@
 # Animebot
 The first (EXPERIMENTAL) bot for Amino!
 
-Animebot is a simple all purpouse bot for Amino when you can find information about Anime and Manga in spanish (maybe in the future I want to support OVA, ONA, music original videos, movies, tv shorts, DVD/Bluray specials, one shots and novels), find information in Wikipedia, play simple games and more.
+Animebot is a simple all purpouse bot for Amino in spanish when you can find information about Anime and Manga in spanish (maybe in the future I want to support OVA, ONA, music original videos, movies, tv shorts, DVD/Bluray specials, one shots and novels), find information in Wikipedia, play simple games and more.
 
 ## Install
 
@@ -43,14 +43,14 @@ Example: /getCharacter Conan Edogawa
 
 ### Funny commands and games
 
-* /8ball pregunta: Has una pregunta a la bola 8 mágica.
+* /8ball question: Make a question to magic 8-ball
 ```
 Ejemplo: /8ball Él no me vió?
 ```
 
-* /flipCoin: Lanza una moneda para sacar cara o cruz.
+* /flipCoin: Throw a coin to get heads or tails.
 
-* /rsp: Juega piedra, papel o tijeras con Animebot.
+* /rsp: Play rock, scissor, paper with Animebot
 ```
 Ejemplo: /rsp tijera
 ```
@@ -62,22 +62,22 @@ Ejemplo: /trump tu madre es hombre
 
 ### Search commands
 
-* /getHoroscope: Obtiene tu horoscopo y número de la suerte diario.
+* /getHoroscope: Get your daily horoscope and lucky number.
 ```
 Ejemplo: /getHoroscope aries
 ```
 
-* /pokedex: Obtiene información de un Pokémon
+* /pokedex: Get Pokedex information.
 ```
 Ejemplo: /pokedex pikachu
 ```
 
-* /wikipedia: Obtiene información de Wikipedia en español
+* /wikipedia: Get a Wikipedia definition in spanish.
 ```
 Ejemplo: /wikipedia anime
 ```
 
-* /edamam: Obtiene información desde la base de datos de Edamam en español sobre alguna receta de cocina al azar basado en un término de busqueda
+* /edamam: Get a recipe from Edamam in spanish database related to search term.
 ```
 Ejemplo: /edamam chocolate
 ```
