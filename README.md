@@ -3,6 +3,8 @@ The first (EXPERIMENTAL) bot for Amino!
 
 Animebot is a simple all purpouse bot for Amino in spanish when you can find information about Anime and Manga in spanish (maybe in the future I want to support OVA, ONA, music original videos, movies, tv shorts, DVD/Bluray specials, one shots and novels), find information in Wikipedia, play simple games and more.
 
+`The following information is in English for practical reasons. Even so, the bot is made to be used in Spanish speaking communities.`
+
 ## Install
 
 * Install dependencies:
