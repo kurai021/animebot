@@ -71,7 +71,7 @@ async function getHoroscope(req,receiver){
                 url = `https://aztro.sameerkumar.website/?sign=aquarius&day=today`;
                 break;
             default:
-                url = `https://aztro.sameerkumar.website/?sign=piscis&day=today`;
+                url = `https://aztro.sameerkumar.website/?sign=pisces&day=today`;
                 break;
         }
 
