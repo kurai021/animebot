@@ -84,6 +84,10 @@ Ejemplo: /wikipedia anime
 
 /edamam: Obtiene información desde la base de datos de Edamam en español sobre alguna receta de cocina al azar basado en un término de busqueda
 Ejemplo: /edamam chocolate
+
+[B]Otros comandos
+
+/bienvenido: Da un mensaje de bienvenida para tus amigos en tu grupo de chat público.
         `)
 }
 

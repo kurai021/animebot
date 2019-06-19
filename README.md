@@ -84,6 +84,10 @@ Ejemplo: /wikipedia anime
 Ejemplo: /edamam chocolate
 ```
 
+### Other commands
+
+* /bienvenido: Give a welcome message to your friends in your public chat group.
+
 ## Acknowledgments
 
 * This software is unofficial! It's against the Terms of Service to use this Software to interact with Amino APIs. I (the creator of Animebot) am not responsible for any kind of damage (ban / legal actions) done by Narvii, Inc.
