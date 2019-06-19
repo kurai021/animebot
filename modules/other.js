@@ -18,6 +18,18 @@ async function unknownText(receiver){
     )
 }
 
+async function welcome(titleChat,receiver){
+    await amino.sendChat(
+        auth.amino.community,
+        receiver,
+        `
+        [i]Bienvenido a ${titleChat}!
+        
+Espero que te la pases muy bien aquí, sientete libre de hablar con quien gustes cuando quieras. No olvides seguir las reglas de la comunidad y este chat para evitar malos entendidos.
+        `
+    )
+}
+
 async function reqHelp(receiver){
     await amino.sendChat(
         auth.amino.community,
@@ -298,6 +310,7 @@ Puedes encontrar más información en ${wikiURL}
 
 module.exports = {
     unknownText: unknownText,
+    welcome: welcome,
     reqHelp: reqHelp,
     reqPoke: reqPoke,
     reqWikipedia: reqWikipedia,

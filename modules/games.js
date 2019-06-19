@@ -30,7 +30,7 @@ async function flipCoin(receiver){
 async function getHoroscope(req,receiver){
     console.log("buscando horoscopo")
 
-    const signs = ["aries","tauro","geminis","cancer","leo","virgo","libra","escorpio","sagitario","capricornio","acuario","piscis"]
+    const signs = ["aries","tauro","geminis","géminis","cancer","leo","virgo","libra","escorpio","escorpion","escorpión","sagitario","capricornio","acuario","piscis"]
     let horoscopeMatch = req.match(/\/getHoroscope (.*)/);
     let url;
 
@@ -46,6 +46,9 @@ async function getHoroscope(req,receiver){
             case 'geminis':
                 url = `https://aztro.sameerkumar.website/?sign=gemini&day=today`;
                 break;
+            case 'géminis':
+                url = `https://aztro.sameerkumar.website/?sign=gemini&day=today`;
+                break;
             case 'cancer':
                 url = `https://aztro.sameerkumar.website/?sign=cancer&day=today`;
                 break;
@@ -59,6 +62,12 @@ async function getHoroscope(req,receiver){
                 url = `https://aztro.sameerkumar.website/?sign=libra&day=today`;
                 break;
             case 'escorpio':
+                url = `https://aztro.sameerkumar.website/?sign=scorpio&day=today`;
+                break;
+            case 'escorpion':
+                url = `https://aztro.sameerkumar.website/?sign=scorpio&day=today`;
+                break;
+            case 'escorpión':
                 url = `https://aztro.sameerkumar.website/?sign=scorpio&day=today`;
                 break;
             case 'saggitarius':

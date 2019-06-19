@@ -18,6 +18,7 @@ let poller = new Poller(3000);
 
             const chatRooms = await amino.getJoinedChats(auth.amino.community);
             let firstChatRoom = chatRooms.threads[0];
+            let titleChat = firstChatRoom.title
             let receiver = firstChatRoom.threadId;
             let lastMessage = await amino.getChat(auth.amino.community, receiver);
             let members = firstChatRoom.memberCount;
@@ -69,6 +70,14 @@ let poller = new Poller(3000);
                             break;
                         case /\/edamam (.*)/.test(message):
                             other.reqFood(message,receiver)
+                            break;
+                        case /\/bienvenido/.test(message):
+                            if(members > 1){
+                                other.welcome(titleChat,receiver);
+                            }
+                            else {
+                                other.unknownText(receiver);
+                            }
                             break;
                         default:
                             if(members == 1){
