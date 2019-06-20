@@ -31,7 +31,7 @@ async function getHoroscope(req,receiver){
     console.log("buscando horoscopo")
 
     const signs = ["aries","tauro","geminis","géminis","cancer","leo","virgo","libra","escorpio","escorpion","escorpión","sagitario","capricornio","acuario","piscis"]
-    let horoscopeMatch = req.match(/\/getHoroscope (.*)/);
+    let horoscopeMatch = req.match(/\/horoscopo (.*)/);
     let url;
 
     if(signs.includes(horoscopeMatch[1])){

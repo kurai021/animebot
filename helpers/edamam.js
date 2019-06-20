@@ -1,4 +1,4 @@
-const auth = require("../helpers/auth");
+const auth = require("./auth");
 const fetch = require("node-fetch");
 
 async function getRecipe(data){

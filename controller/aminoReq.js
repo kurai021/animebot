@@ -23,25 +23,24 @@ let poller = new Poller(3000);
             let lastMessage = await amino.getChat(auth.amino.community, receiver);
             let members = firstChatRoom.memberCount;
             let message = lastMessage.messages[0].msg;
-
             test(message);
 
             function test(message){
                 if(lastMessage.messages[0].author.uid != myProfile.account.uid){
                     switch(true){
-                        case /\/getCharacter (.*)/.test(message):
+                        case /\/character (.*)/.test(message):
                             anime.reqCharacter(message,receiver);
                             break;
-                        case /\/getManga (.*)/.test(message):
+                        case /\/manga (.*)/.test(message):
                             anime.reqManga(message,receiver);
                             break;
-                        case /\/getAnime (.*)/.test(message):
+                        case /\/anime (.*)/.test(message):
                             anime.reqAnime(message,receiver);
                             break;
-                        case /\/getRandomAnime (.*)/.test(message):
+                        case /\/randomAnime (.*)/.test(message):
                             anime.reqRandomAnime(message,receiver);
                             break;
-                        case /\/getRandomManga (.*)/.test(message):
+                        case /\/randomManga (.*)/.test(message):
                             anime.reqRandomManga(message,receiver);
                             break;
                         case /\/help/.test(message):
@@ -53,7 +52,7 @@ let poller = new Poller(3000);
                         case /\/flipCoin/.test(message):
                             games.flipCoin(receiver);
                             break;
-                        case /\/getHoroscope (.*)/.test(message):
+                        case /\/horoscopo (.*)/.test(message):
                             games.getHoroscope(message,receiver);
                             break;
                         case /\/rsp (.*)/.test(message):
@@ -75,9 +74,24 @@ let poller = new Poller(3000);
                             if(members > 1){
                                 other.welcome(titleChat,receiver);
                             }
-                            else {
-                                other.unknownText(receiver);
-                            }
+                            break;
+                        case /\/loli/.test(message):
+                            other.reqLoli(receiver)
+                            break;
+                        case /\/trap/.test(message):
+                            other.reqTrap(receiver)
+                            break;
+                        case /\/abrazo/.test(message):
+                            other.reqAbrazo(receiver)
+                            break;
+                        case /\/husbando/.test(message):
+                            other.reqHusbando(receiver)
+                            break;
+                        case /\/beso/.test(message):
+                            other.reqBeso(receiver)
+                            break;
+                        case /\/caricia/.test(message):
+                            other.reqCaricia(receiver)
                             break;
                         default:
                             if(members == 1){

@@ -9,7 +9,7 @@ let timestamp = Math.floor(Date.now() / 1000)
 
 async function reqCharacter(req, receiver){
     console.log("buscando personaje...");
-    let characterMatch = req.match(/\/getCharacter (.*)/)
+    let characterMatch = req.match(/\/character (.*)/)
     let res = await anilist.getCharacter(characterMatch[1])
     let textFixed = res
         .description
@@ -90,7 +90,7 @@ async function reqRandomManga(req,receiver){
     const categories = ["Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Horror", "Mahou Shoujo", "Mecha", "Music", 
     "Mystery", "Psychological", "Romance", "Sci-Fi", "Slice of Life", "Sports", "Supernatural", "Thriller","action", "adventure", "comedy", "drama", "ecchi", "fantasy", "horror", "mahou shoujo", "mecha", "music", 
     "mystery", "psychological", "romance", "sci-fi", "slice of life", "sports", "supernatural", "thriller"]
-    let randomMangaMatch = req.match(/\/getRandomManga (.*)/)
+    let randomMangaMatch = req.match(/\/randomManga (.*)/)
 
     if(categories.includes(randomMangaMatch[1])){
 
@@ -150,7 +150,7 @@ async function reqRandomAnime(req,receiver){
     const categories = ["Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Horror", "Mahou Shoujo", "Mecha", "Music", 
     "Mystery", "Psychological", "Romance", "Sci-Fi", "Slice of Life", "Sports", "Supernatural", "Thriller","action", "adventure", "comedy", "drama", "ecchi", "fantasy", "horror", "mahou shoujo", "mecha", "music", 
     "mystery", "psychological", "romance", "sci-fi", "slice of life", "sports", "supernatural", "thriller"]
-    let randomAnimeMatch = req.match(/\/getRandomAnime (.*)/)
+    let randomAnimeMatch = req.match(/\/randomAnime (.*)/)
 
     if(categories.includes(randomAnimeMatch[1])){
         let res = await anilist.getRandomAnime(randomAnimeMatch[1])
@@ -206,7 +206,7 @@ Duración: ${res.duration} minutos
 
 async function reqManga(req,receiver){
     console.log("buscando manga...");
-    let mangaMatch = req.match(/\/getManga (.*)/)
+    let mangaMatch = req.match(/\/manga (.*)/)
     let res = await anilist.getManga(mangaMatch[1])
     let textFixed = res
         .description
@@ -252,7 +252,7 @@ Volumenes: ${res.volumes}
 
 async function reqAnime(req,receiver){
     console.log("buscando anime...");
-    let animeMatch = req.match(/\/getAnime (.*)/)
+    let animeMatch = req.match(/\/anime (.*)/)
     let res = await anilist.getAnime(animeMatch[1])
     let textFixed = res
         .description

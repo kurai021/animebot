@@ -7,5 +7,8 @@ module.exports = {
     edamam: {
         id: process.env.EDAMAMID,
         password: process.env.EDAMAMPASSWORD
+    },
+    weez: {
+        password: process.env.WEEZPASSWORD
     }
 };

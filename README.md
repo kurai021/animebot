@@ -13,8 +13,8 @@ npm install
 ```
 * Read the [AniList APIv2 Docs](https://anilist.gitbook.io/anilist-apiv2-docs/)
 * Create a new account in [Amino](https://aminoapps.com/)
-* create a new [translator instance](https://console.bluemix.net/catalog/services/language-translator) you will find IAMURL, IAMAPIKEY, VERSION
-* create a .env file with AMINOEMAIL, AMINOPASSWORD, AMINOCOMMUNITY, IAMURL, IAMAPIKEY, VERSION variables
+* create a new [Edamam developer account](https://developer.edamam.com/) and [create a recipe search API](https://developer.edamam.com/edamam-recipe-api), you will get a new ID and KEY
+* create a .env file with AMINOEMAIL, AMINOPASSWORD, AMINOCOMMUNITY, EDAMAMID and EDAMAMPASSWORD variables
 * For know AMINOCOMMUNITY (the id for your Amino Community), test [this code](https://github.com/AminoJS/Amino.JS/blob/master/examples/getChat.js) 
 
 ## Use
@@ -25,22 +25,22 @@ npm install
 
 ### Commands related to anime and manga
 
-* /getManga title: Get manga information (title native, romaji, image, start and end of publication, chapters, volumes and description).
+* /manga title: Get manga information (title native, romaji, image, start and end of publication, chapters, volumes and description).
 ```
-Example: /getManga death note
+Example: /manga death note
 ```
-* /getAnime title: Get anime information (title native, romaji, image, start and end of publication, episodes, duration and description).
+* /anime title: Get anime information (title native, romaji, image, start and end of publication, episodes, duration and description).
 ```
-Example: /getAnime evangelion
+Example: /anime evangelion
 ```
-* /getRandomAnime categoría: Get anime suggestions randomly
-* /getRandomManga categoría: Get manga suggestions randomly
+* /randomAnime categoría: Get anime suggestions randomly
+* /randomManga categoría: Get manga suggestions randomly
 ```
 The categories in both cases are: Action, Adventure, Comedy, Drama, Ecchi, Fantasy, Horror, Mahou Shoujo, Mecha, Music, Mystery, Psychological, Romance, Sci-Fi, Slice of Life, Sports, Supernatural, Thriller
 ```
-* /getCharacter character: Get character bio
+* /character character: Get character bio
 ```
-Example: /getCharacter Conan Edogawa
+Example: /character Conan Edogawa
 ```
 
 ### Funny commands and games
@@ -64,9 +64,9 @@ Ejemplo: /trump tu madre es hombre
 
 ### Search commands
 
-* /getHoroscope: Get your daily horoscope and lucky number.
+* /horoscopo: Get your daily horoscope and lucky number.
 ```
-Ejemplo: /getHoroscope aries
+Ejemplo: /horoscopo aries
 ```
 
 * /pokedex: Get Pokedex information.
@@ -87,6 +87,18 @@ Ejemplo: /edamam chocolate
 ### Other commands
 
 * /bienvenido: Give a welcome message to your friends in your public chat group.
+
+* /loli: I will find you a loli for you (SFW)
+
+* /trap: I will find you a trap (SFW)
+
+* /husbando: A husbando for you (SFW)
+
+* /abrazo: Let me hug you :3
+
+* /beso: Let me kiss you :3
+
+* /caricia: Can I pet you? :3
 
 ## Acknowledgments
 

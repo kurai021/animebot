@@ -1,5 +1,6 @@
 const auth = require("../helpers/auth");
 const edamam = require("../helpers/edamam");
+const weez = require("../helpers/weez")
 const fs = require('fs');
 const amino = require("amino.js");
 const wikijs = require("wikijs").default;
@@ -16,6 +17,156 @@ async function unknownText(receiver){
         Comando incorrecto, puede conocer los comandos disponibles con /help
         `
     )
+}
+
+async function reqBeso(receiver){
+    let res = await weez.beso();
+
+    await amino.sendChat(
+        auth.amino.community,
+        receiver,
+        `
+        Te doy un beso owo
+        `
+    )
+
+    await fetch(res)
+        .then(res => {
+            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+            res.body.pipe(dest);
+            dest.on("finish", async function(){
+                await amino.sendGIF(
+                    auth.amino.community,
+                    receiver,
+                    './' + timestamp + '.jpg'
+                )
+            })
+        });
+}
+
+async function reqAbrazo(receiver){
+    let res = await weez.abrazo();
+
+    await amino.sendChat(
+        auth.amino.community,
+        receiver,
+        `
+        Te doy un abrazo owo
+        `
+    )
+
+    await fetch(res)
+        .then(res => {
+            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+            res.body.pipe(dest);
+            dest.on("finish", async function(){
+                await amino.sendGIF(
+                    auth.amino.community,
+                    receiver,
+                    './' + timestamp + '.jpg'
+                )
+            })
+        });
+}
+
+async function reqCaricia(receiver){
+    let res = await weez.caricia();
+
+    await amino.sendChat(
+        auth.amino.community,
+        receiver,
+        `
+        Dejame acariciarte un poco owo
+        `
+    )
+
+    await fetch(res)
+        .then(res => {
+            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+            res.body.pipe(dest);
+            dest.on("finish", async function(){
+                await amino.sendGIF(
+                    auth.amino.community,
+                    receiver,
+                    './' + timestamp + '.jpg'
+                )
+            })
+        });
+}
+
+async function reqLoli(receiver){
+    let res = await weez.loli();
+
+    await amino.sendChat(
+        auth.amino.community,
+        receiver,
+        `
+        Buscando una loli :3
+        `
+    )
+
+    await fetch(res)
+        .then(res => {
+            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+            res.body.pipe(dest);
+            dest.on("finish", async function(){
+                await amino.sendImage(
+                    auth.amino.community,
+                    receiver,
+                    './' + timestamp + '.jpg'
+                )
+            })
+        });
+}
+
+async function reqHusbando(receiver){
+    let res = await weez.husbando();
+
+    await amino.sendChat(
+        auth.amino.community,
+        receiver,
+        `
+        Buscando un husbando :3
+        `
+    )
+
+    await fetch(res)
+        .then(res => {
+            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+            res.body.pipe(dest);
+            dest.on("finish", async function(){
+                await amino.sendImage(
+                    auth.amino.community,
+                    receiver,
+                    './' + timestamp + '.jpg'
+                )
+            })
+        });
+}
+
+async function reqTrap(receiver){
+    let res = await weez.trap();
+
+    await amino.sendChat(
+        auth.amino.community,
+        receiver,
+        `
+        Buscando un trapito :v
+        `
+    )
+
+    await fetch(res)
+        .then(res => {
+            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+            res.body.pipe(dest);
+            dest.on("finish", async function(){
+                await amino.sendImage(
+                    auth.amino.community,
+                    receiver,
+                    './' + timestamp + '.jpg'
+                )
+            })
+        });
 }
 
 async function welcome(titleChat,receiver){
@@ -43,19 +194,19 @@ async function reqHelp(receiver){
 
 [B]Comandos relacionados a anime y manga
         
-/getManga título: Obtiene información de un manga específico (título nativo, romaji, imagen, inicio y fin de publicación, capítulos, volumenes y descripción).
+/manga título: Obtiene información de un manga específico (título nativo, romaji, imagen, inicio y fin de publicación, capítulos, volumenes y descripción).
 Ejemplo: /getManga death note
 
-/getAnime título: Obtiene información de un anime específico (título nativo, romaji, imagen, inicio y fin de publicación, episodios, duración aproximada y descripción).
+/anime título: Obtiene información de un anime específico (título nativo, romaji, imagen, inicio y fin de publicación, episodios, duración aproximada y descripción).
 Ejemplo: /getAnime evangelion
 
-/getRandomAnime categoría: Obtiene información de un anime al azar
+/randomAnime categoría: Obtiene información de un anime al azar
 
-/getRandomManga categoría: Obtiene información de un manga al azar
+/randomManga categoría: Obtiene información de un manga al azar
 
 Las categorías definidas en ambos casos son: Action, Adventure, Comedy, Drama, Ecchi, Fantasy, Horror, Mahou Shoujo, Mecha, Music, Mystery, Psychological, Romance, Sci-Fi, Slice of Life, Sports, Supernatural, Thriller
 
-/getCharacter personaje: Obtiene una biografía de un personaje
+/character personaje: Obtiene una biografía de un personaje
 Ejemplo: /getCharacter Conan Edogawa
 
 [B]Comandos divertidos y juegos
@@ -73,7 +224,7 @@ Ejemplo: /trump tu madre es hombre
 
 [B]Comandos de búsqueda
 
-/getHoroscope: Obtiene tu horoscopo y número de la suerte diario.
+/horoscopo: Obtiene tu horóscopo y número de la suerte diario.
 Ejemplo: /getHoroscope aries
 
 /pokedex: Obtiene información de un Pokémon
@@ -88,6 +239,18 @@ Ejemplo: /edamam chocolate
 [B]Otros comandos
 
 /bienvenido: Da un mensaje de bienvenida para tus amigos en tu grupo de chat público.
+
+/loli: Te busco una loli (SFW)
+
+/trap: Porque con pito es más rico, también puedo buscarte trapitos (SFW)
+
+/husbando: También puedo buscar husbandos para ti :3 (SFW)
+
+/abrazo: Dejame darte un abrazo :3
+
+/beso: Dejame darte un beso :3
+
+/caricia: Te doy una caricia en tu cabeza :3
         `)
 }
 
@@ -240,7 +403,7 @@ Habilidades Ocultas: ${hiddenHab}
                 auth.amino.community,
                 receiver,
                 `
-                Pokémon no encontrado
+                Pokémon no encontrado, recuerda buscarlo en minúsculas.
                 `)
         })
     
@@ -318,5 +481,11 @@ module.exports = {
     reqHelp: reqHelp,
     reqPoke: reqPoke,
     reqWikipedia: reqWikipedia,
-    reqFood: reqFood
+    reqFood: reqFood,
+    reqLoli: reqLoli,
+    reqHusbando: reqHusbando,
+    reqTrap: reqTrap,
+    reqAbrazo: reqAbrazo,
+    reqBeso: reqBeso,
+    reqCaricia:reqCaricia
 }
