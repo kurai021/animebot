@@ -195,10 +195,10 @@ async function reqHelp(receiver){
 [B]Comandos relacionados a anime y manga
         
 /manga título: Obtiene información de un manga específico (título nativo, romaji, imagen, inicio y fin de publicación, capítulos, volumenes y descripción).
-Ejemplo: /getManga death note
+Ejemplo: /manga death note
 
 /anime título: Obtiene información de un anime específico (título nativo, romaji, imagen, inicio y fin de publicación, episodios, duración aproximada y descripción).
-Ejemplo: /getAnime evangelion
+Ejemplo: /anime evangelion
 
 /randomAnime categoría: Obtiene información de un anime al azar
 
@@ -207,7 +207,7 @@ Ejemplo: /getAnime evangelion
 Las categorías definidas en ambos casos son: Action, Adventure, Comedy, Drama, Ecchi, Fantasy, Horror, Mahou Shoujo, Mecha, Music, Mystery, Psychological, Romance, Sci-Fi, Slice of Life, Sports, Supernatural, Thriller
 
 /character personaje: Obtiene una biografía de un personaje
-Ejemplo: /getCharacter Conan Edogawa
+Ejemplo: /character Conan Edogawa
 
 [B]Comandos divertidos y juegos
 
