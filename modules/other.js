@@ -235,7 +235,7 @@ Ejemplo: /trump tu madre es hombre
 [B]Comandos de búsqueda
 
 /horoscopo: Obtiene tu horóscopo y número de la suerte diario.
-Ejemplo: /getHoroscope aries
+Ejemplo: /horoscopo aries
 
 /pokedex: Obtiene información de un Pokémon
 Ejemplo: /pokedex pikachu

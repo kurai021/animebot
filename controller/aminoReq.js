@@ -6,7 +6,7 @@ const jokes = require("../modules/jokes")
 const auth = require("../helpers/auth");
 const Poller = require('../helpers/poller');
 
-let firstPoller = new Poller(500);
+let firstPoller = new Poller(100);
 let secondPoller = new Poller(3000);
 
 (async function () {
