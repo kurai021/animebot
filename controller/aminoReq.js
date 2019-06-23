@@ -6,7 +6,7 @@ const jokes = require("../modules/jokes")
 const auth = require("../helpers/auth");
 const Poller = require('../helpers/poller');
 
-let firstPoller = new Poller(100);
+let firstPoller = new Poller(1000);
 let secondPoller = new Poller(3000);
 
 (async function () {
@@ -32,8 +32,12 @@ let secondPoller = new Poller(3000);
             members = firstChatRoom.memberCount;
             let message = lastMessage.messages[0].msg;
 
-            if (!messagesArray.find(o => o.receiver === receiver && o.message === message && o.title === titleChat && o.members === members)){
-                if(lastMessage.messages[0].author.uid != myProfile.account.uid){
+            if (!messagesArray.find(o => o.receiver === receiver && o.message === message && o.title === titleChat && o.members === members) && lastMessage.messages[0].author.uid != myProfile.account.uid){
+                if(members == 1){
+                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                }
+
+                else {
                     switch(true){
                         case /\/character (.*)/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
@@ -103,6 +107,7 @@ let secondPoller = new Poller(3000);
                             break;
                     }
                 }
+                    
             }
 
             console.log(`
@@ -261,7 +266,10 @@ let secondPoller = new Poller(3000);
                             })
                         break;
                     default:
-                        console.log("no hacer nada...")
+                        other.unknownText(messagesArray[0].receiver)
+                            .then(async function(){
+                                await messagesArray.shift();
+                            })
                         break;
                 }           
             }
