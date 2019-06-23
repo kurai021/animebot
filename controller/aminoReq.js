@@ -38,10 +38,10 @@ let secondPoller = new Poller(3000);
                 }
             }
 
-            /*console.log(`
+            console.log(`
             array:
 
-            ${JSON.stringify(messagesArray)}`)*/
+            ${JSON.stringify(messagesArray)}`)
 
         }
         
