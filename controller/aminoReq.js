@@ -34,7 +34,74 @@ let secondPoller = new Poller(3000);
 
             if (!messagesArray.find(o => o.receiver === receiver && o.message === message && o.title === titleChat && o.members === members)){
                 if(lastMessage.messages[0].author.uid != myProfile.account.uid){
-                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                    switch(true){
+                        case /\/character (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/manga (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/anime (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/randomAnime (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/randomManga (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/help/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/8ball (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/flipCoin/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/horoscopo (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/rsp (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/trump (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/pokedex (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/wikipedia (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/edamam (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/bienvenido/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/loli/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/trap/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/abrazo/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/husbando/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/beso/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        case /\/caricia/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
+                        default:
+                                console.log("no hacer nada...")
+                            break;
+                    }
                 }
             }
 
@@ -194,15 +261,7 @@ let secondPoller = new Poller(3000);
                             })
                         break;
                     default:
-                        if(messagesArray[0].members == 1){
-                            other.unknownText(messagesArray[0].receiver)
-                                .then(async function(){
-                                    await messagesArray.shift();
-                                })
-                        }
-                        else {
-                            messagesArray.shift();
-                        }
+                        console.log("no hacer nada...")
                         break;
                 }           
             }
