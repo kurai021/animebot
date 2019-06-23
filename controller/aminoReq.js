@@ -6,7 +6,7 @@ const jokes = require("../modules/jokes")
 const auth = require("../helpers/auth");
 const Poller = require('../helpers/poller');
 
-let firstPoller = new Poller(500);
+let firstPoller = new Poller(100);
 let secondPoller = new Poller(3000);
 
 (async function () {
@@ -176,7 +176,7 @@ let secondPoller = new Poller(3000);
                         break;
                     case /\/horoscopo (.*)/.test(messagesArray[0].message):
                         games.getHoroscope(messagesArray[0].message,messagesArray[0].receiver)
-                            then(async function(){
+                            .then(async function(){
                                 await messagesArray.shift();
                             })
                         break;
