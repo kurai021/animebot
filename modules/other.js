@@ -9,6 +9,16 @@ const poke = new Pokedex();
 
 let timestamp = Math.floor(Date.now() / 1000)
 
+async function noPublic(receiver){
+    await amino.sendChat(
+        auth.amino.community,
+        receiver,
+        `
+        Este comando no está disponible en chats privados, puede conocer los comandos disponibles con /help
+        `
+    )
+}
+
 async function unknownText(receiver){
     await amino.sendChat(
         auth.amino.community,
@@ -32,13 +42,13 @@ async function reqBeso(receiver){
 
     await fetch(res)
         .then(res => {
-            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+            const dest = fs.createWriteStream(`${timestamp}.gif`);
             res.body.pipe(dest);
             dest.on("finish", async function(){
                 await amino.sendGIF(
                     auth.amino.community,
                     receiver,
-                    './' + timestamp + '.jpg'
+                    './' + timestamp + '.gif'
                 )
             })
         });
@@ -57,13 +67,13 @@ async function reqAbrazo(receiver){
 
     await fetch(res)
         .then(res => {
-            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+            const dest = fs.createWriteStream(`${timestamp}.gif`);
             res.body.pipe(dest);
             dest.on("finish", async function(){
                 await amino.sendGIF(
                     auth.amino.community,
                     receiver,
-                    './' + timestamp + '.jpg'
+                    './' + timestamp + '.gif'
                 )
             })
         });
@@ -82,13 +92,13 @@ async function reqCaricia(receiver){
 
     await fetch(res)
         .then(res => {
-            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+            const dest = fs.createWriteStream(`${timestamp}.gif`);
             res.body.pipe(dest);
             dest.on("finish", async function(){
                 await amino.sendGIF(
                     auth.amino.community,
                     receiver,
-                    './' + timestamp + '.jpg'
+                    './' + timestamp + '.gif'
                 )
             })
         });
@@ -477,6 +487,7 @@ Puedes encontrar más información en ${wikiURL}
 
 module.exports = {
     unknownText: unknownText,
+    noPublic: noPublic,
     welcome: welcome,
     reqHelp: reqHelp,
     reqPoke: reqPoke,

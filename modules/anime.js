@@ -8,7 +8,6 @@ const anilist = require("../helpers/anilist");
 let timestamp = Math.floor(Date.now() / 1000)
 
 async function reqCharacter(req, receiver){
-    console.log("buscando personaje...");
     let characterMatch = req.match(/\/character (.*)/)
     let res = await anilist.getCharacter(characterMatch[1])
     let textFixed = res
@@ -84,9 +83,7 @@ Romaji: ${res.name.native}
       });
 }
 
-
 async function reqRandomManga(req,receiver){
-    console.log("buscando una sugerencia de manga...");
     const categories = ["Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Horror", "Mahou Shoujo", "Mecha", "Music", 
     "Mystery", "Psychological", "Romance", "Sci-Fi", "Slice of Life", "Sports", "Supernatural", "Thriller","action", "adventure", "comedy", "drama", "ecchi", "fantasy", "horror", "mahou shoujo", "mecha", "music", 
     "mystery", "psychological", "romance", "sci-fi", "slice of life", "sports", "supernatural", "thriller"]
@@ -146,7 +143,6 @@ Volumenes: ${res.volumes}
 }
 
 async function reqRandomAnime(req,receiver){
-    console.log("buscando una sugerencia de anime...");
     const categories = ["Action", "Adventure", "Comedy", "Drama", "Ecchi", "Fantasy", "Horror", "Mahou Shoujo", "Mecha", "Music", 
     "Mystery", "Psychological", "Romance", "Sci-Fi", "Slice of Life", "Sports", "Supernatural", "Thriller","action", "adventure", "comedy", "drama", "ecchi", "fantasy", "horror", "mahou shoujo", "mecha", "music", 
     "mystery", "psychological", "romance", "sci-fi", "slice of life", "sports", "supernatural", "thriller"]
@@ -172,7 +168,6 @@ async function reqRandomAnime(req,receiver){
             })
         });
         
-        /*linea 63*/
         await amino.sendChat(
             auth.amino.community,
             receiver,
@@ -205,7 +200,6 @@ Duración: ${res.duration} minutos
 }
 
 async function reqManga(req,receiver){
-    console.log("buscando manga...");
     let mangaMatch = req.match(/\/manga (.*)/)
     let res = await anilist.getManga(mangaMatch[1])
     let textFixed = res
@@ -251,7 +245,6 @@ Volumenes: ${res.volumes}
 /* orden para buscar anime */
 
 async function reqAnime(req,receiver){
-    console.log("buscando anime...");
     let animeMatch = req.match(/\/anime (.*)/)
     let res = await anilist.getAnime(animeMatch[1])
     let textFixed = res
@@ -272,7 +265,6 @@ async function reqAnime(req,receiver){
             })
         });
         
-        /*linea 89*/
         await amino.sendChat(
             auth.amino.community,
             receiver,
