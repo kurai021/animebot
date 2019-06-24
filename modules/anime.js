@@ -9,8 +9,10 @@ let timestamp = Math.floor(Date.now() / 1000)
 
 async function reqCharacter(req, receiver){
     let characterMatch = req.match(/\/character (.*)/)
-    let res = await anilist.getCharacter(characterMatch[1])
-    let textFixed = res
+
+    await anilist.getCharacter(characterMatch[1])
+        .then(async res=>{
+            let textFixed = res
         .description
         .replace(/<br>\\*/g, `
         `)
@@ -22,9 +24,9 @@ async function reqCharacter(req, receiver){
         .replace(/<\/strong>\\*/g, ' 』')
         
     fetch(res.image.large)
-        .then(res => {
+        .then(image => {
             const dest = fs.createWriteStream(`${timestamp}.jpg`);
-            res.body.pipe(dest);
+            image.body.pipe(dest);
             dest.on("finish", async function(){
                 await amino.sendImage(
                     auth.amino.community,
@@ -81,6 +83,18 @@ Romaji: ${res.name.native}
       }, async function(result) {
           await amino.sendChat(auth.amino.community, receiver, result.translation)
       });
+
+    })
+    .catch(async function(){
+        await amino.sendChat(
+            auth.amino.community,
+            receiver,
+            `
+            Personaje no encontrado
+            `
+        )
+    })
+    
 }
 
 async function reqRandomManga(req,receiver){
@@ -156,9 +170,9 @@ async function reqRandomAnime(req,receiver){
             `)
 
     fetch(res.coverImage.large)
-        .then(res => {
+        .then(image => {
             const dest = fs.createWriteStream(`${timestamp}.jpg`);
-            res.body.pipe(dest);
+            image.body.pipe(dest);
             dest.on("finish", async function(){
                 await amino.sendImage(
                     auth.amino.community,
@@ -201,16 +215,17 @@ Duración: ${res.duration} minutos
 
 async function reqManga(req,receiver){
     let mangaMatch = req.match(/\/manga (.*)/)
-    let res = await anilist.getManga(mangaMatch[1])
-    let textFixed = res
+    await anilist.getManga(mangaMatch[1])
+        .then(async res=>{
+            let textFixed = res
         .description
         .replace(/<br>\\*/g, `
         `)
 
     fetch(res.coverImage.large)
-        .then(res => {
+        .then(image => {
             const dest = fs.createWriteStream(`${timestamp}.jpg`);
-            res.body.pipe(dest);
+            image.body.pipe(dest);
             dest.on("finish", async function(){
                 await amino.sendImage(
                     auth.amino.community,
@@ -240,22 +255,34 @@ Volumenes: ${res.volumes}
       }, async function(result) {
           await amino.sendChat(auth.amino.community, receiver, result.translation)
       });
+    })
+    .catch(async function(){
+        await amino.sendChat(
+            auth.amino.community,
+            receiver,
+            `
+            Manga no encontrado
+            `
+        )
+    })
 }
 
 /* orden para buscar anime */
 
 async function reqAnime(req,receiver){
     let animeMatch = req.match(/\/anime (.*)/)
-    let res = await anilist.getAnime(animeMatch[1])
-    let textFixed = res
+
+    await anilist.getAnime(animeMatch[1])
+        .then(async res=>{
+            let textFixed = res
         .description
         .replace(/<br>\\*/g, `
         `)
 
     fetch(res.coverImage.large)
-        .then(res => {
+        .then(image => {
             const dest = fs.createWriteStream(`${timestamp}.jpg`);
-            res.body.pipe(dest);
+            image.body.pipe(dest);
             dest.on("finish", async function(){
                 await amino.sendImage(
                     auth.amino.community,
@@ -285,6 +312,17 @@ Duración: ${res.duration} minutos
           }, async function(result) {
               await amino.sendChat(auth.amino.community, receiver, result.translation)
           });
+    })
+    .catch(async function(){
+        await amino.sendChat(
+            auth.amino.community,
+            receiver,
+            `
+            Anime no encontrado
+            `
+        )
+    })
+    
 }
 
 module.exports = {
