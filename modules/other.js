@@ -422,33 +422,43 @@ Habilidades Ocultas: ${hiddenHab}
 async function reqFood(req,receiver){
     let foodMatch = req.match(/\/edamam (.*)/)
 
-    let res = await edamam.getRecipe(foodMatch[1]);
-
-    await amino.sendChat(
-        auth.amino.community,
-        receiver,
-        `
-        ${res.recipe.label}
-
-[U]Ingredientes:
-${res.recipe.ingredientLines}
-
-[U]Procedimiento:
-${res.recipe.url}
-        `)
-
-    await fetch(res.recipe.image)
-        .then(res => {
-            const dest = fs.createWriteStream(`${timestamp}.jpg`);
-            res.body.pipe(dest);
-            dest.on("finish", async function(){
-                await amino.sendImage(
-                    auth.amino.community,
-                    receiver,
-                    './' + timestamp + '.jpg'
-                )
-            })
-        });
+    await edamam.getRecipe(foodMatch[1])
+        .then(async res=>{
+            await amino.sendChat(
+                auth.amino.community,
+                receiver,
+                `
+                ${res.recipe.label}
+        
+        [U]Ingredientes:
+        ${res.recipe.ingredientLines}
+        
+        [U]Procedimiento:
+        ${res.recipe.url}
+                `)
+        
+            await fetch(res.recipe.image)
+                .then(image => {
+                    const dest = fs.createWriteStream(`${timestamp}.jpg`);
+                    image.body.pipe(dest);
+                    dest.on("finish", async function(){
+                        await amino.sendImage(
+                            auth.amino.community,
+                            receiver,
+                            './' + timestamp + '.jpg'
+                        )
+                    })
+                });
+        })
+        .catch(async function(){
+            await amino.sendChat(
+                auth.amino.community,
+                receiver,
+                `
+                No se encontraron recetas
+                `
+            )
+        })
     
 }
 

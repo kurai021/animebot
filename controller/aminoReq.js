@@ -6,7 +6,7 @@ const jokes = require("../modules/jokes")
 const auth = require("../helpers/auth");
 const Poller = require('../helpers/poller');
 
-let firstPoller = new Poller(1000);
+let firstPoller = new Poller(500);
 let secondPoller = new Poller(3000);
 
 (async function () {
@@ -15,106 +15,113 @@ let secondPoller = new Poller(3000);
 
     let messagesArray = [];
     let titleChat;
+    let receiver;
+    let lastMessage;
     let members;
+    let message;
 
     firstPoller.onPoll(() => {
 
         toArray();
 
         async function toArray(){
+
             const chatRooms = await amino.getJoinedChats(auth.amino.community);
-            let firstChatRoom = chatRooms.threads[0];
-            titleChat = firstChatRoom.title
 
-            let receiver = firstChatRoom.threadId;
-            let lastMessage = await amino.getChat(auth.amino.community, receiver);
+            chatRooms.threads.forEach(async chat => {
+                titleChat = chat.title;
+                receiver = chat.threadId;
 
-            members = firstChatRoom.memberCount;
-            let message = lastMessage.messages[0].msg;
+                members = chat.memberCount;
 
-            if (!messagesArray.find(o => o.receiver === receiver && o.message === message && o.title === titleChat && o.members === members) && lastMessage.messages[0].author.uid != myProfile.account.uid){
-                if(members == 1){
-                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                }
+                lastMessage = await amino.getChat(auth.amino.community, receiver);
+                message = lastMessage.messages[0].msg;
 
-                else {
-                    switch(true){
-                        case /\/character (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/manga (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/anime (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/randomAnime (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/randomManga (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/help/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/8ball (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/flipCoin/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/horoscopo (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/rsp (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/trump (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/pokedex (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/wikipedia (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/edamam (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/bienvenido/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/loli/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/trap/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/abrazo/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/husbando/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/beso/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        case /\/caricia/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
-                            break;
-                        default:
-                                console.log("no hacer nada...")
-                            break;
+                if (!messagesArray.find(o => o.receiver === receiver && o.message === message && o.title === titleChat && o.members === members) && lastMessage.messages[0].author.uid != myProfile.account.uid){
+                    if(members == 1){
+                        messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
                     }
+    
+                    else {
+                        switch(true){
+                            case /\/character (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/manga (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/anime (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/randomAnime (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/randomManga (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/help/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/8ball (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/flipCoin/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/horoscopo (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/rsp (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/trump (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/pokedex (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/wikipedia (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/edamam (.*)/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/bienvenido/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/loli/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/trap/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/abrazo/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/husbando/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/beso/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            case /\/caricia/.test(message):
+                                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                break;
+                            default:
+                                    console.log("no hacer nada...")
+                                break;
+                        }
+                    }
+                        
                 }
-                    
-            }
-
-            console.log(`
-            array:
-
-            ${JSON.stringify(messagesArray)}`)
-
+    
+                console.log(`
+                array:
+    
+                ${JSON.stringify(messagesArray)}`)
+                
+            });
+ 
         }
         
         firstPoller.poll(); // Go for the next poll
