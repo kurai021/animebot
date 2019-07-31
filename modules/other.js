@@ -4,6 +4,7 @@ const weez = require("../helpers/weez")
 const fs = require('fs');
 const amino = require("amino.js");
 const wikijs = require("wikijs").default;
+const Wikia = require("../helpers/wikia");
 const Pokedex = require("pokedex-promise-v2");
 const poke = new Pokedex();
 
@@ -242,6 +243,9 @@ Ejemplo: /pokedex pikachu
 
 /wikipedia: Obtiene información de Wikipedia en español
 Ejemplo: /wikipedia anime
+
+/drama: Obtiene información relacionada a series y películas asiaticas
+Ejemplo: /drama Go Go Squid!
 
 /edamam: Obtiene información desde la base de datos de Edamam en español sobre alguna receta de cocina al azar basado en un término de busqueda
 Ejemplo: /edamam chocolate
@@ -495,6 +499,53 @@ Puedes encontrar más información en ${wikiURL}
     })
 }
 
+async function reqDrama(req,receiver){
+    let dramaMatch = req.match(/\/drama (.*)/)
+    const wikia = new Wikia({ wiki: "drama" });
+
+    await wikia.search(dramaMatch[1])
+        .then(async data => {
+            let id = data.items[0].id;
+
+            await wikia.getArticleDetails(id)
+                .then(async data => {
+                    await fetch(data.items[id].thumbnail)
+                        .then(image => {
+                            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+                            image.body.pipe(dest);
+                            dest.on("finish", async function(){
+                                await amino.sendImage(
+                                    auth.amino.community,
+                                    receiver,
+                                    './' + timestamp + '.jpg'
+                                )
+                            })
+                        });
+
+                    await amino.sendChat(
+                        auth.amino.community,
+                        receiver,
+                        `[B]${data.items[id].title}
+                        
+${data.items[id].abstract}
+
+Puedes ver más información en: ${data.basepath}${data.items[id].url}
+                        `
+                        )
+                })
+
+        })
+        .catch(async err => {
+            console.log(err)
+
+            await amino.sendChat(
+                auth.amino.community,
+                receiver,
+                "término no encontrado")
+        })
+
+}
+
 module.exports = {
     unknownText: unknownText,
     noPublic: noPublic,
@@ -502,6 +553,7 @@ module.exports = {
     reqHelp: reqHelp,
     reqPoke: reqPoke,
     reqWikipedia: reqWikipedia,
+    reqDrama: reqDrama,
     reqFood: reqFood,
     reqLoli: reqLoli,
     reqHusbando: reqHusbando,

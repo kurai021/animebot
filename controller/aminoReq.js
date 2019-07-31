@@ -82,6 +82,9 @@ let secondPoller = new Poller(3000);
                         case /\/wikipedia (.*)/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
                             break;
+                        case /\/drama (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                            break;
                         case /\/edamam (.*)/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
                             break;
@@ -203,6 +206,12 @@ let secondPoller = new Poller(3000);
                         break;
                     case /\/pokedex (.*)/.test(messagesArray[0].message):
                         other.reqPoke(messagesArray[0].message,messagesArray[0].receiver)
+                            .then(async function(){
+                                await messagesArray.shift();
+                            })
+                        break;
+                    case /\/drama (.*)/.test(messagesArray[0].message):
+                        other.reqDrama(messagesArray[0].message,messagesArray[0].receiver)
                             .then(async function(){
                                 await messagesArray.shift();
                             })
