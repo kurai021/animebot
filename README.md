@@ -47,41 +47,46 @@ Example: /character Conan Edogawa
 
 * /8ball question: Make a question to magic 8-ball
 ```
-Ejemplo: /8ball Él no me vió?
+Example: /8ball Él no me vió?
 ```
 
 * /flipCoin: Throw a coin to get heads or tails.
 
 * /rsp: Play rock, scissor, paper with Animebot
 ```
-Ejemplo: /rsp tijera
+Example: /rsp tijera
 ```
 
 * /trump: Has que Donald Trump publique una nueva orden ejecutiva
 ```
-Ejemplo: /trump tu madre es hombre
+Example: /trump tu madre es hombre
 ```
 
 ### Search commands
 
 * /horoscopo: Get your daily horoscope and lucky number.
 ```
-Ejemplo: /horoscopo aries
+Example: /horoscopo aries
 ```
 
 * /pokedex: Get Pokedex information.
 ```
-Ejemplo: /pokedex pikachu
+Example: /pokedex pikachu
 ```
 
 * /wikipedia: Get a Wikipedia definition in spanish.
 ```
-Ejemplo: /wikipedia anime
+Example: /wikipedia anime
+```
+
+* /drama: Get information about asian movies and series
+```
+Example: /drama Go Go Squid!
 ```
 
 * /edamam: Get a recipe from Edamam in spanish database related to search term.
 ```
-Ejemplo: /edamam chocolate
+Example: /edamam chocolate
 ```
 
 ### Other commands

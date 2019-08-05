@@ -4,7 +4,7 @@ const other = require("../modules/other")
 const games = require("../modules/games")
 const jokes = require("../modules/jokes")
 const auth = require("../helpers/auth");
-const Poller = require('../helpers/poller');
+const Poller = require("../helpers/poller");
 
 let firstPoller = new Poller(500);
 let secondPoller = new Poller(3000);
