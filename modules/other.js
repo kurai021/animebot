@@ -30,6 +30,20 @@ async function unknownText(receiver){
     )
 }
 
+async function reqLogro(logro,receiver){
+    
+    await weez.logro(logro)
+        .then(res => {
+            fs.writeFile(`${timestamp}.jpg`, res, 'base64', async function(){
+                await amino.sendImage(
+                    auth.amino.community,
+                    receiver,
+                    './' + timestamp + '.jpg'
+                )
+            })
+        })
+}
+
 async function reqBeso(receiver){
     let res = await weez.beso();
 
@@ -180,14 +194,14 @@ async function reqTrap(receiver){
         });
 }
 
-async function welcome(titleChat,receiver){
+async function welcome(titleChat, info, receiver){
     await amino.sendChat(
         auth.amino.community,
         receiver,
         `
         [i]Bienvenido a ${titleChat}!
         
-Espero que te la pases muy bien aquí, sientete libre de hablar con quien gustes cuando quieras. No olvides seguir las reglas de la comunidad y este chat para evitar malos entendidos.
+${info}
         `
     )
 }
@@ -560,5 +574,6 @@ module.exports = {
     reqTrap: reqTrap,
     reqAbrazo: reqAbrazo,
     reqBeso: reqBeso,
-    reqCaricia:reqCaricia
+    reqCaricia:reqCaricia,
+    reqLogro:reqLogro
 }

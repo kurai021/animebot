@@ -16,6 +16,8 @@ let secondPoller = new Poller(3000);
     let messagesArray = [];
     let firstChatRoom;
     let titleChat;
+    let iconChat;
+    let infoChat;
     let receiver;
     let lastMessage;
     let members;
@@ -28,7 +30,11 @@ let secondPoller = new Poller(3000);
         async function toArray(){
             const chatRooms = await amino.getJoinedChats(auth.amino.community);
             firstChatRoom = chatRooms.threads[0];
+
+            //console.log(firstChatRoom)
             titleChat = firstChatRoom.title
+            iconChat = firstChatRoom.icon
+            infoChat = firstChatRoom.content
 
             receiver = firstChatRoom.threadId;
             lastMessage = await amino.getChat(auth.amino.community, receiver);
@@ -36,78 +42,81 @@ let secondPoller = new Poller(3000);
             members = firstChatRoom.memberCount;
             message = lastMessage.messages[0].msg;
 
-            if (!messagesArray.find(o => o.receiver === receiver && o.message === message && o.title === titleChat && o.members === members) && lastMessage.messages[0].author.uid != myProfile.account.uid){
+            if (!messagesArray.find(o => o.receiver === receiver && o.message === message && o.title === titleChat && o.icon === iconChat && o.info === infoChat && o.members === members) && lastMessage.messages[0].author.uid != myProfile.account.uid){
                 if(members == 1){
-                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                    messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                 }
 
                 else {
                     switch(true){
                         case /\/character (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/manga (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/anime (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/randomAnime (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/randomManga (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/help/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/8ball (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/flipCoin/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/horoscopo (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/rsp (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/trump (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/pokedex (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/wikipedia (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/drama (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/edamam (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/bienvenido/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/loli/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/trap/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/abrazo/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/husbando/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/beso/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/caricia/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "members":members});
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
+                            break;
+                        case /\/logro (.*)/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         default:
                                 console.log("no hacer nada...")
@@ -229,8 +238,8 @@ let secondPoller = new Poller(3000);
                             })
                         break;
                     case /\/bienvenido/.test(messagesArray[0].message):
-                        if(messagesArray[0].members != 1){
-                            other.welcome(messagesArray[0].title,messagesArray[0].receiver)
+                        if(messagesArray[0].members != 1 && messagesArray[0].title != null){
+                            other.welcome(messagesArray[0].title, messagesArray[0].info, messagesArray[0].receiver)
                                 .then(async function(){
                                     await messagesArray.shift();
                                 })
@@ -274,6 +283,12 @@ let secondPoller = new Poller(3000);
                         break;
                     case /\/caricia/.test(messagesArray[0].message):
                         other.reqCaricia(messagesArray[0].receiver)
+                            .then(async function(){
+                                await messagesArray.shift();
+                            })
+                        break;
+                    case /\/logro (.*)/.test(messagesArray[0].message):
+                        other.reqLogro(messagesArray[0].message,messagesArray[0].receiver)
                             .then(async function(){
                                 await messagesArray.shift();
                             })

@@ -86,11 +86,27 @@ async function caricia(){
     return caricia;
 }
 
+async function logro(req){
+    let logroMatch = req.match(/\/logro (.*)/)
+    let logro;
+    await weez.logro(logroMatch[1])
+        .then(data => {
+            logro = data;
+            return;
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    
+    return logro;
+}
+
 module.exports = {
     loli:loli,
     trap:trap,
     husbando: husbando,
     abrazo:abrazo,
     beso:beso,
-    caricia:caricia
+    caricia:caricia,
+    logro:logro
 }
