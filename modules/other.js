@@ -279,6 +279,9 @@ Ejemplo: /edamam chocolate
 /beso: Dejame darte un beso :3
 
 /caricia: Te doy una caricia en tu cabeza :3
+
+/logro: Muestra ese nuevo logro!
+Ejemplo: /logro te han dejado en la friendzone
         `)
 }
 
