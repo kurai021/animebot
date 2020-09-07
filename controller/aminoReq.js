@@ -11,6 +11,10 @@ let secondPoller = new Poller(3000);
 
 (async function () {
     await amino.login(auth.amino.email, auth.amino.password)
+    //const myCommunitys = await amino.getJoinedComs();
+    //myCommunitys.coms.map(comminity => {
+        //console.log(`${comminity.name} | ${comminity.link}| ${comminity.id}`);
+    //});
     const myProfile = await amino.getMyProfile()
 
     let messagesArray = [];
