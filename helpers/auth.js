@@ -4,11 +4,7 @@ module.exports = {
         password: process.env.AMINOPASSWORD,
         community: process.env.AMINOCOMMUNITY
     },
-    edamam: {
-        id: process.env.EDAMAMID,
-        password: process.env.EDAMAMPASSWORD
-    },
-    weez: {
-        password: process.env.WEEZPASSWORD
+    tenor: {
+        password: process.env.TENORID
     }
 };

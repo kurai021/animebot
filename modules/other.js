@@ -1,6 +1,5 @@
 const auth = require("../helpers/auth");
-const edamam = require("../helpers/edamam");
-const weez = require("../helpers/weez")
+const tenorGIF = require("../helpers/tenor")
 const fs = require('fs');
 const amino = require("amino.js");
 const wikijs = require("wikijs").default;
@@ -30,7 +29,7 @@ async function unknownText(receiver){
     )
 }
 
-async function reqLogro(logro,receiver){
+/*async function reqLogro(logro,receiver){
     
     await weez.logro(logro)
         .then(res => {
@@ -42,10 +41,10 @@ async function reqLogro(logro,receiver){
                 )
             })
         })
-}
+}*/
 
 async function reqBeso(receiver){
-    let res = await weez.beso();
+    let res = await tenorGIF.beso();
 
     await amino.sendChat(
         auth.amino.community,
@@ -70,7 +69,7 @@ async function reqBeso(receiver){
 }
 
 async function reqAbrazo(receiver){
-    let res = await weez.abrazo();
+    let res = await tenorGIF.abrazo();
 
     await amino.sendChat(
         auth.amino.community,
@@ -95,7 +94,7 @@ async function reqAbrazo(receiver){
 }
 
 async function reqCaricia(receiver){
-    let res = await weez.caricia();
+    let res = await tenorGIF.caricia();
 
     await amino.sendChat(
         auth.amino.community,
@@ -120,7 +119,7 @@ async function reqCaricia(receiver){
 }
 
 async function reqLoli(receiver){
-    let res = await weez.loli();
+    let res = await tenorGIF.loli();
 
     await amino.sendChat(
         auth.amino.community,
@@ -132,20 +131,45 @@ async function reqLoli(receiver){
 
     await fetch(res)
         .then(res => {
-            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+            const dest = fs.createWriteStream(`${timestamp}.gif`);
             res.body.pipe(dest);
             dest.on("finish", async function(){
-                await amino.sendImage(
+                await amino.sendGIF(
                     auth.amino.community,
                     receiver,
-                    './' + timestamp + '.jpg'
+                    './' + timestamp + '.gif'
+                )
+            })
+        });
+}
+
+async function reqBelle(receiver){
+    let res = await tenorGIF.belle();
+
+    await amino.sendChat(
+        auth.amino.community,
+        receiver,
+        `
+        Buscando algo rikolino...
+        `
+    )
+
+    await fetch(res)
+        .then(res => {
+            const dest = fs.createWriteStream(`${timestamp}.gif`);
+            res.body.pipe(dest);
+            dest.on("finish", async function(){
+                await amino.sendGIF(
+                    auth.amino.community,
+                    receiver,
+                    './' + timestamp + '.gif'
                 )
             })
         });
 }
 
 async function reqHusbando(receiver){
-    let res = await weez.husbando();
+    let res = await tenorGIF.husbando();
 
     await amino.sendChat(
         auth.amino.community,
@@ -157,19 +181,19 @@ async function reqHusbando(receiver){
 
     await fetch(res)
         .then(res => {
-            const dest = fs.createWriteStream(`${timestamp}.jpg`);
+            const dest = fs.createWriteStream(`${timestamp}.gif`);
             res.body.pipe(dest);
             dest.on("finish", async function(){
-                await amino.sendImage(
+                await amino.sendGIF(
                     auth.amino.community,
                     receiver,
-                    './' + timestamp + '.jpg'
+                    './' + timestamp + '.gif'
                 )
             })
         });
 }
 
-async function reqTrap(receiver){
+/*async function reqTrap(receiver){
     let res = await weez.trap();
 
     await amino.sendChat(
@@ -192,7 +216,7 @@ async function reqTrap(receiver){
                 )
             })
         });
-}
+}*/
 
 async function welcome(titleChat, info, receiver){
     await amino.sendChat(
@@ -211,7 +235,7 @@ async function reqHelp(receiver){
         auth.amino.community,
         receiver,
         `
-        Hola, me llamo Animebot :3, esta es mi lista de comandos. Si necesitas ayuda adicional con algun comando, puedes escribirle a Kurai021.
+        Hola, me llamo AnimeBot :3, esta es mi lista de comandos. Si necesitas ayuda adicional con algun comando, puedes escribirle a Kurai021.
 
 [B]Comandos informativos
 
@@ -261,18 +285,11 @@ Ejemplo: /wikipedia anime
 /drama: Obtiene información relacionada a series y películas asiaticas
 Ejemplo: /drama Go Go Squid!
 
-/edamam: Obtiene información desde la base de datos de Edamam en español sobre alguna receta de cocina al azar basado en un término de busqueda
-Ejemplo: /edamam chocolate
-
 [B]Otros comandos
 
 /bienvenido: Da un mensaje de bienvenida para tus amigos en tu grupo de chat público.
 
 /loli: Te busco una loli (SFW)
-
-/trap: Porque con pito es más rico, también puedo buscarte trapitos (SFW)
-
-/husbando: También puedo buscar husbandos para ti :3 (SFW)
 
 /abrazo: Dejame darte un abrazo :3
 
@@ -280,8 +297,7 @@ Ejemplo: /edamam chocolate
 
 /caricia: Te doy una caricia en tu cabeza :3
 
-/logro: Muestra ese nuevo logro!
-Ejemplo: /logro te han dejado en la friendzone
+/belle: Sip...esa Belle y si NSFW >__O
         `)
 }
 
@@ -440,52 +456,9 @@ Habilidades Ocultas: ${hiddenHab}
     
 }
 
-async function reqFood(req,receiver){
-    let foodMatch = req.match(/\/edamam (.*)/)
-
-    await edamam.getRecipe(foodMatch[1])
-        .then(async res=>{
-            await amino.sendChat(
-                auth.amino.community,
-                receiver,
-                `
-                ${res.recipe.label}
-        
-        [U]Ingredientes:
-        ${res.recipe.ingredientLines}
-        
-        [U]Procedimiento:
-        ${res.recipe.url}
-                `)
-        
-            await fetch(res.recipe.image)
-                .then(image => {
-                    const dest = fs.createWriteStream(`${timestamp}.jpg`);
-                    image.body.pipe(dest);
-                    dest.on("finish", async function(){
-                        await amino.sendImage(
-                            auth.amino.community,
-                            receiver,
-                            './' + timestamp + '.jpg'
-                        )
-                    })
-                });
-        })
-        .catch(async function(){
-            await amino.sendChat(
-                auth.amino.community,
-                receiver,
-                `
-                No se encontraron recetas
-                `
-            )
-        })
-    
-}
-
 async function reqWikipedia(req,receiver){
     let wikiMatch = req.match(/\/wikipedia (.*)/)
-    let wikiURL;
+    let wikiURL, title, summary, firstChars;
     
     wikijs({
         apiUrl: 'https://es.wikipedia.org/w/api.php',
@@ -493,19 +466,25 @@ async function reqWikipedia(req,receiver){
     })
     .page(wikiMatch[1])
     .then(async data => {
+        title = data.raw.title;
         wikiURL = data.raw.canonicalurl;
-        return data.summary();
+
+        return data.summary()
     })
-    .then (async res => {
-        let firstChars = res.split('\n')[0] + "...";
+    .then(async data => {
+        summary = data;
+        firstChars = summary.split('\n')[0] + "...";
+
         await amino.sendChat(
             auth.amino.community,
             receiver,
-            `${firstChars}
-            
-Puedes encontrar más información en ${wikiURL}
+            `${title}
+
+            ${firstChars}
+
+            Puedes encontrar más información en ${wikiURL}
             `
-            )
+        )
     })
     .catch(async err => {
         console.log(err)
@@ -530,38 +509,36 @@ async function reqDrama(req,receiver){
                         .then(image => {
                             const dest = fs.createWriteStream(`${timestamp}.jpg`);
                             image.body.pipe(dest);
-                            dest.on("finish", async function(){
-                                await amino.sendImage(
+                            dest.on("finish", function(){
+                                amino.sendImage(
                                     auth.amino.community,
                                     receiver,
                                     './' + timestamp + '.jpg'
                                 )
+
+                                amino.sendChat(
+                                    auth.amino.community,
+                                    receiver,
+                                    `[B]${data.items[id].title}
+                                    
+            ${data.items[id].abstract}
+            
+            Puedes ver más información en: ${data.basepath}${data.items[id].url}
+                                    `
+                                )
                             })
-                        });
-
-                    await amino.sendChat(
-                        auth.amino.community,
-                        receiver,
-                        `[B]${data.items[id].title}
-                        
-${data.items[id].abstract}
-
-Puedes ver más información en: ${data.basepath}${data.items[id].url}
-                        `
-                        )
-                })
-
-        })
+                        })
         .catch(async err => {
             console.log(err)
-
-            await amino.sendChat(
-                auth.amino.community,
-                receiver,
-                "término no encontrado")
+                
+                await amino.sendChat(
+                    auth.amino.community,
+                    receiver,
+                    "término no encontrado")
+                })
+            })
         })
-
-}
+    }
 
 module.exports = {
     unknownText: unknownText,
@@ -571,12 +548,12 @@ module.exports = {
     reqPoke: reqPoke,
     reqWikipedia: reqWikipedia,
     reqDrama: reqDrama,
-    reqFood: reqFood,
     reqLoli: reqLoli,
     reqHusbando: reqHusbando,
-    reqTrap: reqTrap,
+    //reqTrap: reqTrap,
     reqAbrazo: reqAbrazo,
     reqBeso: reqBeso,
     reqCaricia:reqCaricia,
-    reqLogro:reqLogro
+    reqBelle:reqBelle
+    //reqLogro:reqLogro
 }

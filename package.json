@@ -24,8 +24,8 @@
     "node-google-translate-skidz": "^1.1.2",
     "pokedex-promise-v2": "^3.1.1",
     "python-shell": "^1.0.7",
+    "tenorjs": "^1.0.7",
     "webworker-threads": "^0.7.17",
-    "weez": "^1.5.5",
     "wikijs": "^5.2.1"
   }
 }

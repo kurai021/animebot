@@ -1,12 +1,19 @@
 const auth = require("./auth");
-const Weez = require("weez");
-const weez = new Weez.WeezAPI(auth.weez.password);
+const tenor = require("tenorjs");
+
+const Tenor = tenor.client({
+    "Key": auth.tenor.password,
+    "Filter": "off", // "off", "low", "medium", "high", not case sensitive
+    "Locale": "en_US", // Your locale here, case-sensitivity depends on input
+    "MediaFilter": "basic", // either minimal or basic, not case sensitive
+    "DateFormat": "D/MM/YYYY - H:mm:ss A" // Change this accordingly
+})
 
 async function loli(){
     let loli;
-    await weez.randomLoli()
+    await Tenor.Search.Random("loli anime manga","1")
         .then(data => {
-            loli = data;
+            loli = data[0].media[0].tinygif.url;
             return;
         })
         .catch(err => {
@@ -16,7 +23,7 @@ async function loli(){
     return loli;
 }
 
-async function trap(){
+/*async function trap(){
     let trap;
     await weez.randomTrap()
         .then(data => {
@@ -28,27 +35,27 @@ async function trap(){
         })
 
     return trap;
-}
+}*/
 
 async function husbando(){
     let boy;
-    await weez.randomBoys()
+    await Tenor.Search.Random("%23anime %23boy","1")
         .then(data => {
-            boy = data;
+            boy = data[0].media[0].tinygif.url;
             return;
         })
         .catch(err => {
             console.log(err)
         })
-
+        
     return boy;
 }
 
 async function abrazo(){
     let abrazo;
-    await weez.randomAbrazo()
+    await Tenor.Search.Random("anime hug","1")
         .then(data => {
-            abrazo = data;
+            abrazo = data[0].media[0].tinygif.url;
             return;
         })
         .catch(err => {
@@ -60,9 +67,9 @@ async function abrazo(){
 
 async function beso(){
     let beso;
-    await weez.randomBeso()
+    await Tenor.Search.Random("anime kiss","1")
         .then(data => {
-            beso = data;
+            beso = data[0].media[0].tinygif.url;
             return;
         })
         .catch(err => {
@@ -74,9 +81,9 @@ async function beso(){
 
 async function caricia(){
     let caricia;
-    await weez.randomPat()
+    await Tenor.Search.Random("anime pat","1")
         .then(data => {
-            caricia = data;
+            caricia = data[0].media[0].tinygif.url;
             return;
         })
         .catch(err => {
@@ -86,7 +93,21 @@ async function caricia(){
     return caricia;
 }
 
-async function logro(req){
+async function belle(){
+    let belle;
+    await Tenor.Search.Random("%23belledelphine","1")
+        .then(data => {
+            belle = data[0].media[0].tinygif.url;
+            return;
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+    return belle;
+}
+
+/*async function logro(req){
     let logroMatch = req.match(/\/logro (.*)/)
     let logro;
     await weez.logro(logroMatch[1])
@@ -99,14 +120,15 @@ async function logro(req){
         })
     
     return logro;
-}
+}*/
 
 module.exports = {
     loli:loli,
-    trap:trap,
+    //trap:trap,
     husbando: husbando,
     abrazo:abrazo,
     beso:beso,
     caricia:caricia,
-    logro:logro
+    belle:belle
+    //logro:logro
 }

@@ -95,9 +95,6 @@ let secondPoller = new Poller(3000);
                         case /\/drama (.*)/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
-                        case /\/edamam (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
-                            break;
                         case /\/bienvenido/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
@@ -117,6 +114,9 @@ let secondPoller = new Poller(3000);
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/caricia/.test(message):
+                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
+                            break;
+                        case /\/belle/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
                         case /\/logro (.*)/.test(message):
@@ -142,7 +142,6 @@ let secondPoller = new Poller(3000);
     });
 
     firstPoller.poll();
-
 
     secondPoller.onPoll(() => {
 
@@ -235,12 +234,6 @@ let secondPoller = new Poller(3000);
                                 await messagesArray.shift();
                             })
                         break;
-                    case /\/edamam (.*)/.test(messagesArray[0].message):
-                        other.reqFood(messagesArray[0].message,messagesArray[0].receiver)
-                            .then(async function(){
-                                await messagesArray.shift();
-                            })
-                        break;
                     case /\/bienvenido/.test(messagesArray[0].message):
                         if(messagesArray[0].members != 1 && messagesArray[0].title != null){
                             other.welcome(messagesArray[0].title, messagesArray[0].info, messagesArray[0].receiver)
@@ -261,12 +254,12 @@ let secondPoller = new Poller(3000);
                                 await messagesArray.shift();
                             })
                         break;
-                    case /\/trap/.test(messagesArray[0].message):
+                    /*case /\/trap/.test(messagesArray[0].message):
                         other.reqTrap(messagesArray[0].receiver)
                             .then(async function(){
                                 await messagesArray.shift();
                             })
-                        break;
+                        break;*/
                     case /\/abrazo/.test(messagesArray[0].message):
                         other.reqAbrazo(messagesArray[0].receiver)
                             .then(async function(){
@@ -291,12 +284,18 @@ let secondPoller = new Poller(3000);
                                 await messagesArray.shift();
                             })
                         break;
-                    case /\/logro (.*)/.test(messagesArray[0].message):
-                        other.reqLogro(messagesArray[0].message,messagesArray[0].receiver)
+                    case /\/belle/.test(messagesArray[0].message):
+                        other.reqBelle(messagesArray[0].receiver)
                             .then(async function(){
                                 await messagesArray.shift();
                             })
                         break;
+                    /*case /\/logro (.*)/.test(messagesArray[0].message):
+                        other.reqLogro(messagesArray[0].message,messagesArray[0].receiver)
+                            .then(async function(){
+                                await messagesArray.shift();
+                            })
+                        break;*/
                     default:
                         other.unknownText(messagesArray[0].receiver)
                             .then(async function(){
