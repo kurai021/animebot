@@ -472,17 +472,18 @@ async function reqWikipedia(req,receiver){
         return data.summary()
     })
     .then(async data => {
-        summary = data;
-        firstChars = summary.split('\n')[0] + "...";
+        firstChars = data.split('\n')[0] + "...";
+
+        console.log(firstChars)
 
         await amino.sendChat(
             auth.amino.community,
             receiver,
             `${title}
 
-            ${firstChars}
+${firstChars}
 
-            Puedes encontrar más información en ${wikiURL}
+Puedes encontrar más información en ${wikiURL}
             `
         )
     })
@@ -521,9 +522,9 @@ async function reqDrama(req,receiver){
                                     receiver,
                                     `[B]${data.items[id].title}
                                     
-            ${data.items[id].abstract}
+    ${data.items[id].abstract}
             
-            Puedes ver más información en: ${data.basepath}${data.items[id].url}
+    Puedes ver más información en: ${data.basepath}${data.items[id].url}
                                     `
                                 )
                             })

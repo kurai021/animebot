@@ -101,9 +101,9 @@ let secondPoller = new Poller(3000);
                         case /\/loli/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
-                        case /\/trap/.test(message):
+                        /*case /\/trap/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
-                            break;
+                            break;*/
                         case /\/abrazo/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
@@ -119,9 +119,9 @@ let secondPoller = new Poller(3000);
                         case /\/belle/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
-                        case /\/logro (.*)/.test(message):
+                        /*case /\/logro (.*)/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
-                            break;
+                            break;*/
                         default:
                                 console.log("no hacer nada...")
                             break;
