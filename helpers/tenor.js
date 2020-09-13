@@ -5,13 +5,13 @@ const Tenor = tenor.client({
     "Key": auth.tenor.password,
     "Filter": "off", // "off", "low", "medium", "high", not case sensitive
     "Locale": "en_US", // Your locale here, case-sensitivity depends on input
-    "MediaFilter": "basic", // either minimal or basic, not case sensitive
+    "MediaFilter": "minimal", // either minimal or basic, not case sensitive
     "DateFormat": "D/MM/YYYY - H:mm:ss A" // Change this accordingly
 })
 
 async function loli(){
     let loli;
-    await Tenor.Search.Random("loli anime manga","1")
+    await Tenor.Search.Random("loli anime","1")
         .then(data => {
             loli = data[0].media[0].tinygif.url;
             return;
@@ -22,20 +22,6 @@ async function loli(){
     
     return loli;
 }
-
-/*async function trap(){
-    let trap;
-    await weez.randomTrap()
-        .then(data => {
-            trap = data;
-            return;
-        })
-        .catch(err => {
-            console.log(err)
-        })
-
-    return trap;
-}*/
 
 async function husbando(){
     let boy;
@@ -107,28 +93,11 @@ async function belle(){
     return belle;
 }
 
-/*async function logro(req){
-    let logroMatch = req.match(/\/logro (.*)/)
-    let logro;
-    await weez.logro(logroMatch[1])
-        .then(data => {
-            logro = data;
-            return;
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    
-    return logro;
-}*/
-
 module.exports = {
     loli:loli,
-    //trap:trap,
     husbando: husbando,
     abrazo:abrazo,
     beso:beso,
     caricia:caricia,
     belle:belle
-    //logro:logro
 }

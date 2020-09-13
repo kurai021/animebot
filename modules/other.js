@@ -193,31 +193,6 @@ async function reqHusbando(receiver){
         });
 }
 
-/*async function reqTrap(receiver){
-    let res = await weez.trap();
-
-    await amino.sendChat(
-        auth.amino.community,
-        receiver,
-        `
-        Buscando un trapito :v
-        `
-    )
-
-    await fetch(res)
-        .then(res => {
-            const dest = fs.createWriteStream(`${timestamp}.jpg`);
-            res.body.pipe(dest);
-            dest.on("finish", async function(){
-                await amino.sendImage(
-                    auth.amino.community,
-                    receiver,
-                    './' + timestamp + '.jpg'
-                )
-            })
-        });
-}*/
-
 async function welcome(titleChat, info, receiver){
     await amino.sendChat(
         auth.amino.community,
@@ -551,10 +526,8 @@ module.exports = {
     reqDrama: reqDrama,
     reqLoli: reqLoli,
     reqHusbando: reqHusbando,
-    //reqTrap: reqTrap,
     reqAbrazo: reqAbrazo,
     reqBeso: reqBeso,
     reqCaricia:reqCaricia,
     reqBelle:reqBelle
-    //reqLogro:reqLogro
 }

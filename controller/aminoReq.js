@@ -35,7 +35,6 @@ let secondPoller = new Poller(3000);
             const chatRooms = await amino.getJoinedChats(auth.amino.community);
             firstChatRoom = chatRooms.threads[0];
 
-            //console.log(firstChatRoom)
             titleChat = firstChatRoom.title
             iconChat = firstChatRoom.icon
             infoChat = firstChatRoom.content
@@ -101,9 +100,6 @@ let secondPoller = new Poller(3000);
                         case /\/loli/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
-                        /*case /\/trap/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
-                            break;*/
                         case /\/abrazo/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
@@ -119,9 +115,6 @@ let secondPoller = new Poller(3000);
                         case /\/belle/.test(message):
                                 messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
                             break;
-                        /*case /\/logro (.*)/.test(message):
-                                messagesArray.push({"receiver":receiver, "message":message, "title":titleChat, "icon":iconChat, "info":infoChat, "members":members});
-                            break;*/
                         default:
                                 console.log("no hacer nada...")
                             break;
@@ -254,12 +247,6 @@ let secondPoller = new Poller(3000);
                                 await messagesArray.shift();
                             })
                         break;
-                    /*case /\/trap/.test(messagesArray[0].message):
-                        other.reqTrap(messagesArray[0].receiver)
-                            .then(async function(){
-                                await messagesArray.shift();
-                            })
-                        break;*/
                     case /\/abrazo/.test(messagesArray[0].message):
                         other.reqAbrazo(messagesArray[0].receiver)
                             .then(async function(){
@@ -290,12 +277,6 @@ let secondPoller = new Poller(3000);
                                 await messagesArray.shift();
                             })
                         break;
-                    /*case /\/logro (.*)/.test(messagesArray[0].message):
-                        other.reqLogro(messagesArray[0].message,messagesArray[0].receiver)
-                            .then(async function(){
-                                await messagesArray.shift();
-                            })
-                        break;*/
                     default:
                         other.unknownText(messagesArray[0].receiver)
                             .then(async function(){
